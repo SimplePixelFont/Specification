@@ -1,4 +1,4 @@
-# Visual Overview
+# Visual Overview (Outdated)
 | Byte Index | 1 | 2 | 3 | 4 | Next 4(atmost) | Afterwards Any |
 | -----------| - | - | - | - | - | ---- |
 | | `102` | `115` | `70` | [Font Properties](#font-properties) | [Configuration Values](#)| [Character Definitions](#character-definitions) |
