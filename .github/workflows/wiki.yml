@@ -23,10 +23,31 @@ jobs:
       - name: Process markdown files
         run: julia scripts/preprocess.jl --input ./ --output ./build
       
+      - name: Commit processed files to wiki-build branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Create orphan branch (no history needed)
+          git checkout --orphan wiki-build
+          
+          # Remove all tracked files from staging
+          git rm -rf .
+          
+          # Add only the build directory contents
+          cp -r build/* .
+          git add .
+          
+          # Commit
+          git commit -m "Auto-generated wiki content from ${{ github.sha }}"
+          
+          # Force push (replaces previous build)
+          git push origin wiki-build --force
+      
       - name: Sync docs to wiki
         uses: newrelic/wiki-sync-action@main
         with:
-          branch: main
-          source: build
+          branch: wiki-build
+          source: .
           destination: wiki
           token: ${{ secrets.TOKEN }}
