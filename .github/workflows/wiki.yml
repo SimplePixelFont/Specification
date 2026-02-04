@@ -5,12 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   sync-wiki:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN }}
       
       - name: Setup Julia
         uses: julia-actions/setup-julia@v1
