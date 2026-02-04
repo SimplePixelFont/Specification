@@ -1,0 +1,32 @@
+name: Sync Documentation to Wiki
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      
+      - name: Setup Julia
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: '1.9'
+      
+      - name: Install Julia dependencies
+        run: julia -e 'using Pkg; Pkg.add("ArgParse")'
+      
+      - name: Process markdown files
+        run: julia process_docs.jl --input ./ --output ./build
+      
+      - name: Sync docs to wiki
+        uses: newrelic/wiki-sync-action@main
+        with:
+          branch: main
+          source: build
+          destination: wiki
+          token: ${{ secrets.TOKEN }}
