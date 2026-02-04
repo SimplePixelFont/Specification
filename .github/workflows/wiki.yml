@@ -21,7 +21,7 @@ jobs:
         run: julia -e 'using Pkg; Pkg.add("ArgParse")'
       
       - name: Process markdown files
-        run: julia process_docs.jl --input ./ --output ./build
+        run: julia scripts/preprocess.jl --input ./ --output ./build
       
       - name: Sync docs to wiki
         uses: newrelic/wiki-sync-action@main
