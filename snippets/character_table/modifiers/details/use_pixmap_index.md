@@ -1,0 +1,1 @@
+When disabled, the pixmap index defaults to match the character record index (1:1 mapping).

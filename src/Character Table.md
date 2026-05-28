@@ -1,8 +1,4 @@
-Defines mappings between UTF-8 codepoint sequences (characters) and their visual representations (pixmaps).
-
-## Use Cases
-
-- **Character-to-glyph mapping** - Associates text characters, including single utf8 codepoints, ligatures, and grapheme clusters, with their pixmap representation.
+\textinput{../snippets/character_table/breif.md}
 
 ## Table Structure
 
@@ -13,42 +9,42 @@ Defines mappings between UTF-8 codepoint sequences (characters) and their visual
 
 | Bit | Name                     | Description                                                                                          |
 | --- | ------------------------ | ---------------------------------------------------------------------------------------------------- |
-| 0   | `use_advance_x`          | Each record includes an `advance_x` field specifying horizontal pixel advance after rendering        |
-| 1   | `use_pixmap_index`       | Each record includes a `pixmap_index` field to explicitly reference a pixmap by index                |
-| 2   | `use_pixmap_table_index` | Each record includes a `pixmap_table_index` field to specify which linked Pixmap Table to reference. |
-| 3-7 | —                        | Reserved for future use                                                                              |
+| 0   | `use_advance_x`          | \textinput{../snippets/character_table/modifiers/brief/use_advance_x.md}      |
+| 1   | `use_pixmap_index`       | \textinput{../snippets/character_table/modifiers/brief/use_pixmap_index.md}                |
+| 2   | `use_pixmap_table_index` | \textinput{../snippets/character_table/modifiers/brief/use_pixmap_table_index.md} |
+| 3-7 | —                        | \textinput{../snippets/phrase/reserved.md}                                                                              |
 
 #### Flag Details
 
-- **`use_advance_x`**: When disabled, the default advance is the pixmap's width. Letter spacing, if any, is added to the advance value.
-- **`use_pixmap_index`**: When disabled, the pixmap index defaults to match the character record index (1:1 mapping).
-- **`use_pixmap_table_index`**: When disabled, the renderer searches linked Pixmap Tables in order until finding a valid pixmap at the character's index. The first pixmap linked will have priority over the last.
+- **`use_advance_x`**: \textinput{../snippets/character_table/modifiers/details/use_advance_x.md}
+- **`use_pixmap_index`**: \textinput{../snippets/character_table/modifiers/details/use_pixmap_index.md}
+- **`use_pixmap_table_index`**: \textinput{../snippets/character_table/modifiers/details/use_pixmap_table_index.md}
 
 ### Configuration Flags
 
 | Bit | Name                           | Description                                                     |
 | --- | ------------------------------ | --------------------------------------------------------------- |
-| 0   | `use_constant_codepoint_count` | All characters in this table have the same number of codepoints |
-| 1-7 | —                              | Reserved for future use                                         |
+| 0   | `use_constant_codepoint_count` | \textinput{../snippets/character_table/configurations/flag/use_constant_codepoint_count.md} |
+| 1-7 | —                              | \textinput{../snippets/phrase/reserved.md}                                         |
 
 #### Configuration Values
 
 | Name                       | Type | Condition                                    | Description                                                         |
 | -------------------------- | ---- | -------------------------------------------- | ------------------------------------------------------------------- |
-| `constant_codepoint_count` | `u8` | If `use_constant_codepoint_count` is enabled | The exact codepoint length of each `codepoints` field in this table |
+| `constant_codepoint_count` | `u8` | \textinput{../snippets/character_table/configurations/condition/constant_codepoint_count.md} | \textinput{../snippets/character_table/configurations/brief/constant_codepoint_count.md} |
 
 ### Table Links
 
 | Bit | Name                 | Description                                   |
 | --- | -------------------- | --------------------------------------------- |
-| 0   | `link_pixmap_tables` | This table links to one or more Pixmap Tables |
-| 1-7 | —                    | Reserved for future use                       |
+| 0   | `link_pixmap_tables` | \textinput{../snippets/character_table/links/condition/link_pixmap_tables.md} |
+| 1-7 | —                    | \textinput{../snippets/phrase/reserved.md}                       |
 
 #### Link Arrays
 
 | Name            | Type      | Condition                          | Description                                                   |
 | --------------- | --------- | ---------------------------------- | ------------------------------------------------------------- |
-| `pixmap_tables` | `Vec<u8>` | If `link_pixmap_tables` is enabled | Array of Pixmap Table indices this character table references |
+| `pixmap_tables` | `Vec<u8>` | \textinput{../snippets/character_table/links/condition/pixmap_tables.md} | \textinput{../snippets/character_table/links/brief/pixmap_tables.md} |
 
 ## Character Record
 
@@ -56,10 +52,10 @@ Each character record contains the following fields in order:
 
 | Field                | Type                 | Condition                                       | Description                                                                                 |
 | -------------------- | -------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `advance_x`          | `u8`                 | If `use_advance_x` modifier is enabled          | Number of pixels to advance horizontally after rendering this character                     |
-| `pixmap_index`       | `u8`                 | If `use_pixmap_index` modifier is enabled       | Index of the pixmap within the referenced Pixmap Table(s)                                   |
-| `pixmap_table_index` | `Index<PixmapTable>` | If `use_pixmap_table_index` modifier is enabled | Index of the specific Pixmap Table to use for this character                                |
-| `codepoints`         | `str`                | Always present                                  | UTF-8 encoded codepoint sequence (null-terminated unless `constant_codepoint_count` is set) |
+| `advance_x`          | `u8`                 | \textinput{../snippets/character_table/records/condition/advance_x.md} | \textinput{../snippets/character_table/records/brief/advance_x.md}                     |
+| `pixmap_index`       | `u8`                 | \textinput{../snippets/character_table/records/condition/pixmap_index.md} | \textinput{../snippets/character_table/records/brief/pixmap_index.md}                                   |
+| `pixmap_table_index` | `Index<PixmapTable>` | \textinput{../snippets/character_table/records/condition/pixmap_table_index.md} | \textinput{../snippets/character_table/records/brief/pixmap_table_index.md}                                |
+| `codepoints`         | `str`                | \textinput{../snippets/character_table/records/condition/codepoints.md} | \textinput{../snippets/character_table/records/brief/codepoints.md} |
 
 ### Record Layout Examples
 

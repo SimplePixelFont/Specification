@@ -1,0 +1,15 @@
+{
+  "name": "specification",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "snippet:generate": "tsx scripts/snippet-tool.ts generate",
+    "snippet:collapse": "tsx scripts/snippet-tool.ts collapse",
+    "snippet:expand": "tsx scripts/snippet-tool.ts expand"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "tsx": "^4.11.1",
+    "typescript": "^5.5.4"
+  }
+}

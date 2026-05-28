@@ -1,0 +1,56 @@
+{
+  "brief.md": "Defines mappings between UTF-8 codepoint sequences (characters) and their visual representations (pixmaps).\n\n## Use Cases\n\n- **Character-to-glyph mapping** - Associates text characters, including single utf8 codepoints, ligatures, and grapheme clusters, with their pixmap representation.",
+  "character_table": {
+    "configurations": {
+      "brief": {
+        "constant_codepoint_count.md": "The exact codepoint length of each `codepoints` field in this table"
+      },
+      "condition": {
+        "constant_codepoint_count.md": "If `use_constant_codepoint_count` is enabled."
+      },
+      "flag": {
+        "use_constant_codepoint_count.md": "All characters in this table have the same number of codepoints."
+      }
+    },
+    "links": {
+      "brief": {
+        "pixmap_tables.md": "Vector of Pixmap Table indices this character table references."
+      },
+      "condition": {
+        "pixmap_tables.md": "If `link_pixmap_tables` is enabled."
+      },
+      "flag": {
+        "link_pixmap_tables.md": "This table links to one or more Pixmap Tables."
+      }
+    },
+    "modifiers": {
+      "brief": {
+        "use_advance_x.md": "Each record includes an `advance_x` field specifying horizontal pixel advance after rendering.",
+        "use_pixmap_index.md": "Each record includes a `pixmap_index` field to explicitly reference a pixmap by index.",
+        "use_pixmap_table_index.md": "Each record includes a `pixmap_table_index` field to specify which linked Pixmap Table to reference."
+      },
+      "details": {
+        "use_advance_x.md": "When disabled, the default advance is the pixmap's width. Letter spacing, if any, is added to the advance value.",
+        "use_pixmap_index.md": "When disabled, the pixmap index defaults to match the character record index (1:1 mapping).",
+        "use_pixmap_table_index.md": "When disabled, the renderer searches linked Pixmap Tables in order until finding a valid pixmap at the character's index. The first pixmap linked will have priority over the last."
+      }
+    },
+    "records": {
+      "brief": {
+        "advance_x.md": "Number of pixels to advance horizontally after rendering this character.",
+        "codepoints.md": "Always present",
+        "pixmap_index.md": "If `use_pixmap_index` modifier is enabled.",
+        "pixmap_table_index.md": "If `use_pixmap_table_index` modifier is enabled."
+      },
+      "condition": {
+        "advance_x.md": "If `use_advance_x` modifier is enabled.",
+        "codepoints.md": "UTF-8 encoded codepoint sequence (null-terminated unless `constant_codepoint_count` is set).",
+        "pixmap_index.md": "Index of the pixmap within the referenced Pixmap Table(s).",
+        "pixmap_table_index.md": "Index of the specific Pixmap Table to use for this character."
+      }
+    }
+  },
+  "phrase": {
+    "reserved.md": "Reserved for future use."
+  }
+}

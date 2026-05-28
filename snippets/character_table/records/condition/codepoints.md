@@ -1,0 +1,1 @@
+UTF-8 encoded codepoint sequence (null-terminated unless `constant_codepoint_count` is set).

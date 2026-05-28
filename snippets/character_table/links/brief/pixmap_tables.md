@@ -1,0 +1,1 @@
+Vector of Pixmap Table indices this character table references.
