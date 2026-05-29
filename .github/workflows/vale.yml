@@ -29,7 +29,7 @@ jobs:
         if: needs.vale.outputs.outcome == 'success'
         uses: SimplePixelFont/badge-spf-action@main
         with:
-          filename: grammer.png
+          filename: specification_grammer.png
           label: Grammer
           message: passing
           labelColor: "#2d3136"
@@ -41,7 +41,7 @@ jobs:
         if: needs.vale.outputs.outcome == 'failure'
         uses: SimplePixelFont/badge-spf-action@main
         with:
-          filename: grammer.png
+          filename: specification_grammer.png
           label: Grammer
           message: failing
           labelColor: "#2d3136"
