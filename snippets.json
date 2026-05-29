@@ -1,6 +1,6 @@
 {
-  "brief.md": "Defines mappings between UTF-8 codepoint sequences (characters) and their visual representations (pixmaps).\n\n## Use Cases\n\n- **Character-to-glyph mapping** - Associates text characters, including single utf8 codepoints, ligatures, and grapheme clusters, with their pixmap representation.",
   "character_table": {
+    "brief.md": "Defines mappings between UTF-8 codepoint sequences (characters) and their visual representations (pixmaps).\n\n## Use Cases\n\n- **Character-to-glyph mapping** - Associates text characters, including single utf8 codepoints, ligatures, and grapheme clusters, with their pixmap representation.\n",
     "configurations": {
       "brief": {
         "constant_codepoint_count.md": "The exact codepoint length of each `codepoints` field in this table"
@@ -50,7 +50,72 @@
       }
     }
   },
+  "color_table": {
+    "brief.md": "# color_table table\n\nWrite the documentation content for color_table table here.",
+    "configurations": {
+      "brief": {
+        "constant_alpha.md": "# constant_alpha\n\nWrite the documentation content for constant_alpha here."
+      }
+    },
+    "modifiers": {
+      "brief": {
+        "use_color_type.md": "# use_color_type\n\nWrite the documentation content for use_color_type here."
+      },
+      "details": {
+        "use_color_type.md": "# use_color_type details\n\nWrite the documentation content for use_color_type details here."
+      }
+    },
+    "records": {
+      "brief": {
+        "alpha.md": "# alpha\n\nWrite the documentation content for alpha here.",
+        "blue.md": "# blue\n\nWrite the documentation content for blue here.",
+        "color_type.md": "# color_type\n\nWrite the documentation content for color_type here.",
+        "green.md": "# green\n\nWrite the documentation content for green here.",
+        "red.md": "# red\n\nWrite the documentation content for red here."
+      }
+    }
+  },
+  "font_table": {
+    "brief.md": "# font_table table\n\nWrite the documentation content for font_table table here.",
+    "links": {
+      "brief": {
+        "character_tables.md": "# character_tables\n\nWrite the documentation content for character_tables here."
+      }
+    },
+    "records": {
+      "brief": {
+        "author.md": "# author\n\nWrite the documentation content for author here.",
+        "character_table_indexes.md": "# character_table_indexes\n\nWrite the documentation content for character_table_indexes here.",
+        "font_type.md": "# font_type\n\nWrite the documentation content for font_type here.",
+        "name.md": "# name\n\nWrite the documentation content for name here.",
+        "version.md": "# version\n\nWrite the documentation content for version here."
+      }
+    }
+  },
   "phrase": {
     "reserved.md": "Reserved for future use."
+  },
+  "pixmap_table": {
+    "brief.md": "# pixmap_table table\n\nWrite the documentation content for pixmap_table table here.",
+    "configurations": {
+      "brief": {
+        "constant_bits_per_pixel.md": "# constant_bits_per_pixel\n\nWrite the documentation content for constant_bits_per_pixel here.",
+        "constant_height.md": "# constant_height\n\nWrite the documentation content for constant_height here.",
+        "constant_width.md": "# constant_width\n\nWrite the documentation content for constant_width here."
+      }
+    },
+    "links": {
+      "brief": {
+        "color_tables.md": "# color_tables\n\nWrite the documentation content for color_tables here."
+      }
+    },
+    "records": {
+      "brief": {
+        "bits_per_pixel.md": "# bits_per_pixel\n\nWrite the documentation content for bits_per_pixel here.",
+        "data.md": "# data\n\nWrite the documentation content for data here.",
+        "height.md": "# height\n\nWrite the documentation content for height here.",
+        "width.md": "# width\n\nWrite the documentation content for width here."
+      }
+    }
   }
 }
