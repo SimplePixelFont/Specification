@@ -158,12 +158,284 @@ async function expandSnippets(options: Record<string, string>) {
   console.log(`Expanded ${path.relative(process.cwd(), inputPath)} into snippets/`);
 }
 
+function getRelativeSnippetPath(snippetType: string, category: string, filename: string): string {
+  // filename is already in the correct format (e.g., "use_advance_x")
+  return `../snippets/${snippetType}/${category}/${filename}.md`;
+}
+
+async function listMdFiles(dir: string): Promise<string[]> {
+  try {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    return entries
+      .filter((e) => e.isFile() && e.name.endsWith(".md"))
+      .map((e) => e.name.replace(/\.md$/i, ""));
+  } catch {
+    return [];
+  }
+}
+
+function fileNameToDisplayName(fileName: string): string {
+  // "use_advance_x" -> "use_advance_x", "constant_codepoint_count" -> "constant_codepoint_count"
+  // Return as-is for display in backticks
+  return fileName;
+}
+
+function addTableHeader(header: string): string {
+  return `\n## ${header}\n`;
+}
+
+function generateModifiersSection(
+  tableName: string,
+  modifiers: string[],
+  snippetType: string
+): string {
+  const lines: string[] = [];
+
+  lines.push(addTableHeader("Modifier Flags"));
+  lines.push("| Bit | Name | Description |");
+  lines.push("| --- | ---- | ----------- |");
+
+  for (let i = 0; i < modifiers.length; i++) {
+    const modFileName = modifiers[i];
+    const flagPath = getRelativeSnippetPath(snippetType, "modifiers/brief", modFileName);
+    lines.push(
+      `| ${i} | \`${modFileName}\` | \\textinput{${flagPath}} |`
+    );
+  }
+
+  // Add reserved bits
+  const nextBit = modifiers.length;
+  if (nextBit < 8) {
+    const endBit = nextBit === 7 ? "7" : `${nextBit}-7`;
+    lines.push(
+      `| ${endBit} | — | \\textinput{../snippets/phrase/reserved.md} |`
+    );
+  }
+
+  lines.push("\n### Flag Details\n");
+
+  for (const modFileName of modifiers) {
+    const detailsPath = getRelativeSnippetPath(snippetType, "modifiers/details", modFileName);
+    lines.push(`- **\`${modFileName}\`**: \\textinput{${detailsPath}}`);
+  }
+
+  return lines.join("\n");
+}
+
+function generateConfigurationsSection(
+  tableName: string,
+  configs: string[],
+  snippetType: string
+): string {
+  const lines: string[] = [];
+
+  lines.push(addTableHeader("Configuration Flags"));
+  lines.push("| Bit | Name | Description |");
+  lines.push("| --- | ---- | ----------- |");
+
+  for (let i = 0; i < configs.length; i++) {
+    const configBriefName = configs[i]; // e.g., "constant_codepoint_count"
+    const flagName = "use_" + configBriefName; // e.g., "use_constant_codepoint_count"
+    const flagPath = getRelativeSnippetPath(snippetType, "configurations/flag", flagName);
+    lines.push(
+      `| ${i} | \`${flagName}\` | \\textinput{${flagPath}} |`
+    );
+  }
+
+  // Add reserved bits
+  const nextBit = configs.length;
+  if (nextBit < 8) {
+    const endBit = nextBit === 7 ? "7" : `${nextBit}-7`;
+    lines.push(
+      `| ${endBit} | — | \\textinput{../snippets/phrase/reserved.md} |`
+    );
+  }
+
+  lines.push("\n### Configuration Values\n");
+  lines.push("| Name | Type | Condition | Description |");
+  lines.push("| ---- | ---- | --------- | ----------- |");
+
+  for (const configBriefName of configs) {
+    const briefPath = getRelativeSnippetPath(snippetType, "configurations/brief", configBriefName);
+    const condPath = getRelativeSnippetPath(snippetType, "configurations/condition", configBriefName);
+    lines.push(
+      `| \`${configBriefName}\` | \`u8\` | \\textinput{${condPath}} | \\textinput{${briefPath}} |`
+    );
+  }
+
+  return lines.join("\n");
+}
+
+function generateLinksSection(
+  tableName: string,
+  links: string[],
+  snippetType: string
+): string {
+  const lines: string[] = [];
+
+  lines.push(addTableHeader("Table Links"));
+  lines.push("| Bit | Name | Description |");
+  lines.push("| --- | ---- | ----------- |");
+
+  for (let i = 0; i < links.length; i++) {
+    const linkBriefName = links[i]; // e.g., "pixmap_tables"
+    const flagName = "link_" + linkBriefName; // e.g., "link_pixmap_tables"
+    // Note: Template shows looking in condition directory for the flag description
+    const flagPath = getRelativeSnippetPath(snippetType, "links/condition", flagName);
+    lines.push(
+      `| ${i} | \`${flagName}\` | \\textinput{${flagPath}} |`
+    );
+  }
+
+  // Add reserved bits
+  const nextBit = links.length;
+  if (nextBit < 8) {
+    const endBit = nextBit === 7 ? "7" : `${nextBit}-7`;
+    lines.push(
+      `| ${endBit} | — | \\textinput{../snippets/phrase/reserved.md} |`
+    );
+  }
+
+  lines.push("\n### Link Arrays\n");
+  lines.push("| Name | Type | Condition | Description |");
+  lines.push("| ---- | ---- | --------- | ----------- |");
+
+  for (const linkBriefName of links) {
+    const briefPath = getRelativeSnippetPath(snippetType, "links/brief", linkBriefName);
+    const condPath = getRelativeSnippetPath(snippetType, "links/condition", linkBriefName);
+    lines.push(
+      `| \`${linkBriefName}\` | \`Vec<u8>\` | \\textinput{${condPath}} | \\textinput{${briefPath}} |`
+    );
+  }
+
+  return lines.join("\n");
+}
+
+function generateRecordsSection(
+  tableName: string,
+  records: string[],
+  snippetType: string
+): string {
+  const lines: string[] = [];
+
+  lines.push(addTableHeader("Record Fields\n"));
+  lines.push("Each record contains the following fields in order:\n");
+  lines.push("| Field | Type | Condition | Description |");
+  lines.push("| ----- | ---- | --------- | ----------- |");
+
+  for (const recordFileName of records) {
+    const briefPath = getRelativeSnippetPath(snippetType, "records/brief", recordFileName);
+    const condPath = getRelativeSnippetPath(snippetType, "records/condition", recordFileName);
+    lines.push(
+      `| \`${recordFileName}\` | \`[TYPE_PLACEHOLDER]\` | \\textinput{${condPath}} | \\textinput{${briefPath}} |`
+    );
+  }
+
+  return lines.join("\n");
+}
+
+function generateExamplesSection(tableName: string): string {
+  const lines: string[] = [];
+
+  lines.push(addTableHeader("Examples\n"));
+  lines.push(
+    "Provide example records demonstrating various field combinations:\n"
+  );
+  lines.push(
+    "**Example 1: Minimal record** (no optional fields)\n```\n[EXAMPLE_PLACEHOLDER]\n```\n"
+  );
+  lines.push(
+    "**Example 2: With optional fields**\n```\n[EXAMPLE_PLACEHOLDER]\n```\n"
+  );
+
+  lines.push(addTableHeader("Complete Table Example\n"));
+  lines.push(
+    "The following byte sequence defines a minimal table with example records:\n"
+  );
+  lines.push("| Byte(s) | Binary | Hex | Description |");
+  lines.push("| ------- | ------ | --- | ----------- |");
+  lines.push("| 1 | `[BINARY_PLACEHOLDER]` | `[HEX_PLACEHOLDER]` | Table identifier |");
+  lines.push("| ... | ... | ... | [DESCRIPTION_PLACEHOLDER] |");
+
+  return lines.join("\n");
+}
+
+async function generateDocument(options: Record<string, string>) {
+  const tableName = options.table || options._positional;
+  if (!tableName) {
+    throw new Error(
+      "A table name is required. Use: document <tableName> --output=<path>"
+    );
+  }
+
+  const tableDir = path.join(process.cwd(), "snippets", tableName);
+  const outputPath = path.resolve(
+    options.output || path.join(process.cwd(), `${tableName}.md`)
+  );
+
+  // Check if table directory exists
+  const exists = await fs
+    .access(tableDir)
+    .then(() => true)
+    .catch(() => false);
+
+  if (!exists) {
+    throw new Error(`Table directory not found: ${tableDir}`);
+  }
+
+  // Build document structure
+  const lines: string[] = [];
+
+  // Add brief introduction
+  const relativePath = path.relative(process.cwd(), tableDir);
+  lines.push(`\\textinput{../${relativePath}/brief.md}\n`);
+
+  // Add table structure section
+  lines.push("## Table Structure\n");
+  lines.push("### Identifier");
+  lines.push("- **Value**: \`[IDENTIFIER_PLACEHOLDER]\`\n");
+
+  // Discover available snippets and generate appropriate sections
+  const modifiersBrief = await listMdFiles(path.join(tableDir, "modifiers", "brief"));
+  const configsBrief = await listMdFiles(path.join(tableDir, "configurations", "brief"));
+  const linksBrief = await listMdFiles(path.join(tableDir, "links", "brief"));
+  const recordsBrief = await listMdFiles(path.join(tableDir, "records", "brief"));
+
+  if (modifiersBrief.length > 0) {
+    lines.push(generateModifiersSection(tableName, modifiersBrief, tableName));
+  }
+
+  if (configsBrief.length > 0) {
+    lines.push(generateConfigurationsSection(tableName, configsBrief, tableName));
+  }
+
+  if (linksBrief.length > 0) {
+    lines.push(generateLinksSection(tableName, linksBrief, tableName));
+  }
+
+  if (recordsBrief.length > 0) {
+    lines.push(generateRecordsSection(tableName, recordsBrief, tableName));
+  }
+
+  // Add examples section
+  lines.push(generateExamplesSection(tableName));
+
+  const doc = lines.join("\n");
+  await fs.writeFile(outputPath, doc, "utf8");
+
+  console.log(
+    `Generated document for table '${tableName}' at ${path.relative(process.cwd(), outputPath)}`
+  );
+}
+
 async function main() {
   const [command, ...rest] = process.argv.slice(2);
   const options = parseArgs(rest);
 
   if (!command) {
-    console.error("Usage: tsx scripts/snippet-tool.ts <generate|collapse|expand> [options]");
+    console.error(
+      "Usage: tsx scripts/snippet-tool.ts <generate|collapse|expand|document> [options]"
+    );
     process.exit(1);
   }
 
@@ -176,6 +448,9 @@ async function main() {
       break;
     case "expand":
       await expandSnippets(options);
+      break;
+    case "document":
+      await generateDocument(options);
       break;
     default:
       console.error(`Unknown command: ${command}`);

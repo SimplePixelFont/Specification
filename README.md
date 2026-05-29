@@ -44,13 +44,3 @@ Lastly we can define the character's pixmap, which is a collection of pixels tha
       - If the number of bits your character pixmap needs is not perfectly dividable by 8, you must close off the unfinished byte by appending the remainder of bits to the end of the last byte. These remainder bits will be completely ignored.
   - You may repeat step 3 for every single character in your font.
   
-## Snippet Tool Usage
-
-The repository includes a TypeScript snippet tool for generating snippet folder structure and collapsing/expanding the `snippets/` tree.
-
-Use these commands after running `npm install` in the repository root:
-
-- `npm run snippet:generate -- <tableName> --configurations=name1,name2 --links=name1 --modifiers=name1,name2 --records=name1,name2`
-- `npm run snippet:collapse -- --output snippets.json`\n- `npm run snippet:expand -- --input snippets.json`
-
-This creates a single collapsed JSON representation of `snippets/` and lets you reconstruct the directory tree from that JSON when needed.\n
