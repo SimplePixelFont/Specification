@@ -1,1 +1,1 @@
-If `use_constant_codepoint_count` is enabled.
+If `use_constant_codepoint_count` enabled.
