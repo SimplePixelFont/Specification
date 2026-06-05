@@ -24,14 +24,14 @@
 
 | Bit | Name                           | Description                                                     |
 | --- | ------------------------------ | --------------------------------------------------------------- |
-| 0   | `use_constant_codepoint_count` | \textinput{../snippets/character_table/configurations/flag/use_constant_codepoint_count.md} |
+| 0   | `use_constant_code_point_count` | \textinput{../snippets/character_table/configurations/flag/use_constant_code_point_count.md} |
 | 1-7 | —                              | \textinput{../snippets/phrase/reserved.md}                                         |
 
 #### Configuration Values
 
 | Name                       | Type | Condition                                    | Description                                                         |
 | -------------------------- | ---- | -------------------------------------------- | ------------------------------------------------------------------- |
-| `constant_codepoint_count` | `u8` | \textinput{../snippets/character_table/configurations/condition/constant_codepoint_count.md} | \textinput{../snippets/character_table/configurations/brief/constant_codepoint_count.md} |
+| `constant_code_point_count` | `u8` | \textinput{../snippets/character_table/configurations/condition/constant_code_point_count.md} | \textinput{../snippets/character_table/configurations/brief/constant_code_point_count.md} |
 
 ### Table Links
 
@@ -54,8 +54,8 @@ Each character record contains the following fields in order:
 | -------------------- | -------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `advance_x`          | `u8`                 | \textinput{../snippets/character_table/records/condition/advance_x.md} | \textinput{../snippets/character_table/records/brief/advance_x.md}                     |
 | `pixmap_index`       | `u8`                 | \textinput{../snippets/character_table/records/condition/pixmap_index.md} | \textinput{../snippets/character_table/records/brief/pixmap_index.md}                                   |
-| `pixmap_table_index` | `Index<PixmapTable>` | \textinput{../snippets/character_table/records/condition/pixmap_table_index.md} | \textinput{../snippets/character_table/records/brief/pixmap_table_index.md}                                |
-| `codepoints`         | `str`                | \textinput{../snippets/character_table/records/condition/codepoints.md} | \textinput{../snippets/character_table/records/brief/codepoints.md} |
+| `pixmap_table_index` | `u8` | \textinput{../snippets/character_table/records/condition/pixmap_table_index.md} | \textinput{../snippets/character_table/records/brief/pixmap_table_index.md}                                |
+| `code_points`         | `String`                | \textinput{../snippets/character_table/records/condition/code_points.md} | \textinput{../snippets/character_table/records/brief/codepoints.md} |
 
 ### Record Layout Examples
 

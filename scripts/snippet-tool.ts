@@ -89,9 +89,13 @@ async function generateStructure(options: Record<string, string>) {
 
   for (const name of configurations) {
     await writePlaceholder(path.join(root, "configurations", "brief", toFileName(name)), name);
+    await writePlaceholder(path.join(root, "configurations", "condition", toFileName(name)), `${name} condition`);
+    await writePlaceholder(path.join(root, "configurations", "flag", toFileName(`use_${name}`)), `use_${name}`);
   }
   for (const name of links) {
     await writePlaceholder(path.join(root, "links", "brief", toFileName(name)), name);
+    await writePlaceholder(path.join(root, "links", "condition", toFileName(name)), `${name} condition`);
+    await writePlaceholder(path.join(root, "links", "flag", toFileName(`link_${name}`)), `link_${name}`);
   }
   for (const name of modifiers) {
     await writePlaceholder(path.join(root, "modifiers", "brief", toFileName(name)), name);
@@ -99,6 +103,7 @@ async function generateStructure(options: Record<string, string>) {
   }
   for (const name of records) {
     await writePlaceholder(path.join(root, "records", "brief", toFileName(name)), name);
+    await writePlaceholder(path.join(root, "records", "condition", toFileName(name)), `${name} condition`);
   }
 
   console.log(`Generated snippet structure for table '${tableName}' at snippets/${tableName}`);
@@ -234,8 +239,8 @@ function generateConfigurationsSection(
   lines.push("| --- | ---- | ----------- |");
 
   for (let i = 0; i < configs.length; i++) {
-    const configBriefName = configs[i]; // e.g., "constant_codepoint_count"
-    const flagName = "use_" + configBriefName; // e.g., "use_constant_codepoint_count"
+    const configBriefName = configs[i]; // e.g., "constant_code_point_count"
+    const flagName = "use_" + configBriefName; // e.g., "use_constant_code_point_count"
     const flagPath = getRelativeSnippetPath(snippetType, "configurations/flag", flagName);
     lines.push(
       `| ${i} | \`${flagName}\` | \\textinput{${flagPath}} |`
@@ -370,7 +375,7 @@ async function generateDocument(options: Record<string, string>) {
 
   const tableDir = path.join(process.cwd(), "snippets", tableName);
   const outputPath = path.resolve(
-    options.output || path.join(process.cwd(), `${tableName}.md`)
+    options.output || path.join(process.cwd(), `src/${tableName}.md`)
   );
 
   // Check if table directory exists
@@ -424,7 +429,8 @@ async function generateDocument(options: Record<string, string>) {
   await fs.writeFile(outputPath, doc, "utf8");
 
   console.log(
-    `Generated document for table '${tableName}' at ${path.relative(process.cwd(), outputPath)}`
+    `Generated document for table '${tableName}' at ${path.relative(process.cwd(), outputPath)}
+    Make sure to reorder fields accordingly!`
   );
 }
 

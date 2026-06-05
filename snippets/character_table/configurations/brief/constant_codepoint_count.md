@@ -1,1 +1,0 @@
-The exact codepoint length of each `codepoints` field in this table

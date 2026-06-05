@@ -1,3 +1,6 @@
-# color_table table
+Stores RGBA color values that can be referenced by pixmap data.
 
-Write the documentation content for color_table table here.
+## Use Cases
+
+- **Pixmap palettes** - When linked to a Pixmap Table, provides the color palette for indexed pixel data.
+- **Color storage** - Can store color sets independently for other purposes.
