@@ -342,7 +342,7 @@ function generateRecordsSection(
 function generateExamplesSection(tableName: string): string {
   const lines: string[] = [];
 
-  lines.push(addTableHeader("Examples\n"));
+  lines.push(addTableHeader("Record Layout Examples\n"));
   lines.push(
     "Provide example records demonstrating various field combinations:\n"
   );
