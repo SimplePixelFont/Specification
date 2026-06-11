@@ -1,3 +1,1 @@
-# constant_bits_per_pixel
-
-Write the documentation content for constant_bits_per_pixel here.
+All pixmaps in this table use the same number of bits to represent a pixel.

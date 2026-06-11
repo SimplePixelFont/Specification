@@ -1,3 +1,1 @@
-# constant_width
-
-Write the documentation content for constant_width here.
+If `use_constant_width` is enabled.

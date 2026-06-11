@@ -1,3 +1,1 @@
-# constant_height
-
-Write the documentation content for constant_height here.
+If `use_constant_height` is enabled.

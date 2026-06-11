@@ -1,3 +1,1 @@
-# constant_height
-
-Write the documentation content for constant_height here.
+All pixmaps in this table share the same height.

@@ -1,3 +1,1 @@
-# constant_bits_per_pixel
-
-Write the documentation content for constant_bits_per_pixel here.
+If `use_constant_bits_per_pixel` is enabled
