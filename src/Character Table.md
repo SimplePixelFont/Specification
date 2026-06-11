@@ -57,7 +57,7 @@ Each character record contains the following fields in order:
 | `advance_x`          | `u8`                 | \textinput{../snippets/character_table/records/condition/advance_x.md} | \textinput{../snippets/character_table/records/brief/advance_x.md}                     |
 | `pixmap_index`       | `u8`                 | \textinput{../snippets/character_table/records/condition/pixmap_index.md} | \textinput{../snippets/character_table/records/brief/pixmap_index.md}                                   |
 | `pixmap_table_index` | `u8` | \textinput{../snippets/character_table/records/condition/pixmap_table_index.md} | \textinput{../snippets/character_table/records/brief/pixmap_table_index.md}                                |
-| `code_points`         | `String`                | \textinput{../snippets/character_table/records/condition/code_points.md} | \textinput{../snippets/character_table/records/brief/codepoints.md} |
+| `code_points`         | `String`                | \textinput{../snippets/character_table/records/condition/code_points.md} | \textinput{../snippets/character_table/records/brief/code_points.md} |
 
 ### Record Layout Examples
 
@@ -65,7 +65,7 @@ Each character record contains the following fields in order:
 ```
 Character 'A' with default pixmap index 0 and default advance
 
-Byte layout:  [codepoints] [null]
+Byte layout:  [code_points] [null]
 Binary:       01000001 00000000
 Hex:          41       00
 Represents:   'A' (U+0041)
@@ -75,7 +75,7 @@ Represents:   'A' (U+0041)
 ```
 Character 'W' with custom 12-pixel advance
 
-Byte layout:  [advance_x] [codepoints] [null]
+Byte layout:  [advance_x] [code_points] [null]
 Binary:       00001100 01010111 00000000
 Hex:          0C       57       00
 Represents:   advance=12, 'W' (U+0057)
@@ -85,7 +85,7 @@ Represents:   advance=12, 'W' (U+0057)
 ```
 Character 'é' using pixmap at index 5
 
-Byte layout:  [pixmap_index] [codepoints] [null]
+Byte layout:  [pixmap_index] [code_points] [null]
 Binary:       00000101 11000011 10101001 00000000
 Hex:          05       C3       A9       00
 Represents:   pixmap_index=5, 'é' (U+00E9, UTF-8: 0xC3 0xA9)
@@ -95,7 +95,7 @@ Represents:   pixmap_index=5, 'é' (U+00E9, UTF-8: 0xC3 0xA9)
 ```
 Character '👍' with advance=16, pixmap_index=42, pixmap_table_index=1
 
-Byte layout:  [advance_x] [pixmap_index] [table_index] [codepoints (4 bytes)] [null]
+Byte layout:  [advance_x] [pixmap_index] [table_index] [code_points (4 bytes)] [null]
 Binary:       00010000 00101010 00000001 11110000 10011111 10010001 10001101 00000000
 Hex:          10       2A       01       F0       9F       91       8D       00
 Represents:   advance=16, pixmap=42, table=1, '👍' (U+1F44D, UTF-8: 0xF0 0x9F 0x91 0x8D)
@@ -103,7 +103,7 @@ Represents:   advance=16, pixmap=42, table=1, '👍' (U+1F44D, UTF-8: 0xF0 0x9F 
 
 **Example 5: With constant cluster codepoints**
 ```
-Configuration: constant_cluster_codepoints = 1 (all ASCII)
+Configuration: constant_cluster_code_points = 1 (all ASCII)
 Character 'B' with fixed 1-byte length
 
 Byte layout:  [grapheme_cluster]
@@ -120,7 +120,7 @@ The following byte sequence defines a minimal Character Table with two character
 | ------- | ---------- | ---- | -------------------------------------------------------------- |
 | 1       | `00000001` | `01` | Table identifier for Character Table                           |
 | 2       | `00000011` | `03` | Modifier flags: `use_advance_x` and `use_pixmap_index` enabled |
-| 3       | `00000001` | `01` | Configuration flags: `constant_codepoint_count` enabled        |
+| 3       | `00000001` | `01` | Configuration flags: `constant_code_point_count` enabled        |
 | 4       | `00000001` | `01` | Configuration value: cluster length = 1 byte                   |
 | 5       | `00000001` | `01` | Table links: `pixmap_tables` enabled                           |
 | 6       | `00000001` | `01` | Pixmap table array length = 1                                  |
