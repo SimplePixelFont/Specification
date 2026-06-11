@@ -1,3 +1,1 @@
-# color_type
-
-Write the documentation content for color_type here.
+If `use_color_type` modifier is enabled.

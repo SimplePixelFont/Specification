@@ -43,19 +43,31 @@ Each record contains the following fields in order:
 | `green` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/color_table/records/condition/green.md} | \textinput{../snippets/color_table/records/brief/green.md} |
 | `blue` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/color_table/records/condition/blue.md} | \textinput{../snippets/color_table/records/brief/blue.md} |
 
-## Examples
 
+### Record Layout Examples
 
-Provide example records demonstrating various field combinations:
-
-**Example 1: Minimal record** (no optional fields)
+**Example 1: Minimal record** (no modifiers or configurations)
 ```
-[EXAMPLE_PLACEHOLDER]
+Byte layout:  [red] [green] [blue]
+Binary:       11111111 00000000 10101010
+Hex:          FF       00       AA
+Color:        rgb(255, 0, 170) - fully opaque magenta
 ```
 
-**Example 2: With optional fields**
+**Example 2: With custom alpha** (constant_alpha not set)
 ```
-[EXAMPLE_PLACEHOLDER]
+Byte layout:  [alpha] [red] [green] [blue]
+Binary:       10000000 11111111 11111111 11111111
+Hex:          80       FF       FF       FF
+Color:        rgba(255, 255, 255, 128) - 50% transparent white
+```
+
+**Example 3: With all optional fields**
+```
+Byte layout:  [color_type] [alpha] [red] [green] [blue]
+Binary:       00000001 11111111 00000000 00000000 00000000
+Hex:          01       FF       00       00       00
+Color:        rgba(0, 0, 0, 255) - absolute black (cannot / should not be modified by renderer)
 ```
 
 

@@ -1,3 +1,1 @@
-# color_type
-
-Write the documentation content for color_type here.
+Color Type value (0 = Dynamic, 1 = Absolute).
