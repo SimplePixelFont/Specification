@@ -1,4 +1,4 @@
-\textinput{snippets/character_table/breif.md}
+\textinput{../snippets/character_table/breif.md}
 
 ## Table Structure
 
