@@ -1,5 +1,7 @@
 \textinput{../snippets/character_table/brief.md}
 
+Specification/snippets/character_table/links/condition/link_pixmap_tables.md
+
 ## Table Structure
 
 ### Identifier
@@ -37,7 +39,7 @@
 
 | Bit | Name                 | Description                                   |
 | --- | -------------------- | --------------------------------------------- |
-| 0   | `link_pixmap_tables` | \textinput{../snippets/character_table/links/condition/link_pixmap_tables.md} |
+| 0   | `link_pixmap_tables` | \textinput{../snippets/character_table/links/flag/link_pixmap_tables.md} |
 | 1-7 | —                    | \textinput{../snippets/phrase/reserved.md}                       |
 
 #### Link Arrays

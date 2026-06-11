@@ -286,7 +286,7 @@ function generateLinksSection(
     const linkBriefName = links[i]; // e.g., "pixmap_tables"
     const flagName = "link_" + linkBriefName; // e.g., "link_pixmap_tables"
     // Note: Template shows looking in condition directory for the flag description
-    const flagPath = getRelativeSnippetPath(snippetType, "links/condition", flagName);
+    const flagPath = getRelativeSnippetPath(snippetType, "links/flag", flagName);
     lines.push(
       `| ${i} | \`${flagName}\` | \\textinput{${flagPath}} |`
     );
