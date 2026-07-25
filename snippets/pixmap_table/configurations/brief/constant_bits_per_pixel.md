@@ -1,3 +1,1 @@
-# constant_bits_per_pixel
-
-Write the documentation content for constant_bits_per_pixel here.
+The bits per pixel shared by all pixmaps in this table (only 1-8 supported).

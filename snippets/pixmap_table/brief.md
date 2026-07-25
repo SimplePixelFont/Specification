@@ -1,3 +1,5 @@
-# pixmap_table table
+Stores glyph data as collections of pixels within pixmaps, representing the visual appearance of a character.
 
-Write the documentation content for pixmap_table table here.
+## Use Cases
+
+- **Glyph storage** - Contains the pixmap images for font characters

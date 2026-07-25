@@ -1,3 +1,1 @@
-# color_tables
-
-Write the documentation content for color_tables here.
+Length byte followed by that many Color Table indices supplying the palette that pixel values index into.

@@ -1,3 +1,1 @@
-# use_color_type
-
-Write the documentation content for use_color_type here.
+Each record includes a `color_type` field indicating the color mutability type.

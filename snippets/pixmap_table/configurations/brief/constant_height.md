@@ -1,3 +1,1 @@
-# constant_height
-
-Write the documentation content for constant_height here.
+The height in pixels shared by all pixmaps in this table.

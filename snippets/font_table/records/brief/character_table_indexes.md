@@ -1,3 +1,1 @@
-# character_table_indexes
-
-Write the documentation content for character_table_indexes here.
+Length byte followed by that many Character Table indices this font may access and use.

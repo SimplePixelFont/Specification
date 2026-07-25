@@ -1,3 +1,1 @@
-# height
-
-Write the documentation content for height here.
+Height of this pixmap in pixels.

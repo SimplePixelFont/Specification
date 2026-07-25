@@ -1,3 +1,1 @@
-# green
-
-Write the documentation content for green here.
+Green channel value.

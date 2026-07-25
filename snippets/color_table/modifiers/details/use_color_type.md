@@ -1,3 +1,1 @@
-# use_color_type details
-
-Write the documentation content for use_color_type details here.
+When disabled, the default color type is dynamic. The rendering engine may change the RGBA color to support features such as, but not limited to; text color, and/or palette theming.

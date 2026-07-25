@@ -1,3 +1,1 @@
-# constant_alpha
-
-Write the documentation content for constant_alpha here.
+The alpha channel value applied to all colors in this table.

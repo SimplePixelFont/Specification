@@ -1,1 +1,1 @@
-Vector of Pixmap Table indices this character table references.
+Length byte followed by that many Pixmap Table indices this character table may reference.

@@ -1,1 +1,1 @@
-Index of the specific Pixmap Table to use for this character.
+If `use_pixmap_table_index` modifier is enabled.

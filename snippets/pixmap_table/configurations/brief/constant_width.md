@@ -1,3 +1,1 @@
-# constant_width
-
-Write the documentation content for constant_width here.
+The width in pixels shared by all pixmaps in this table.

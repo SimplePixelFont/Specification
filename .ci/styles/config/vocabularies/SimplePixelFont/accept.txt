@@ -1,0 +1,2 @@
+(?i)pixmap
+(?i)pixmaps

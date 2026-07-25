@@ -1,3 +1,1 @@
-# author
-
-Write the documentation content for author here.
+Author, manufacturer, or credits for the font.

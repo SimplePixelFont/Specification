@@ -1,1 +1,1 @@
-Index of the pixmap within the referenced Pixmap Table(s).
+If `use_pixmap_index` modifier is enabled.

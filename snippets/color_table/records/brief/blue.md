@@ -1,3 +1,1 @@
-# blue
-
-Write the documentation content for blue here.
+Blue channel value.

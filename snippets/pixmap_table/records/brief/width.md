@@ -1,3 +1,1 @@
-# width
-
-Write the documentation content for width here.
+Width of this pixmap in pixels.
