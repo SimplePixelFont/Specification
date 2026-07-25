@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - documentation
 
 jobs:
   sync-wiki:
@@ -12,10 +11,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
-      
+
       - name: Process markdown files
         run: npx https://github.com/The-Nice-One/rail-yard.git preprocess -i ./src -o ./build
-      
+
       - name: Sync docs to wiki
         uses: newrelic/wiki-sync-action@main
         with:
