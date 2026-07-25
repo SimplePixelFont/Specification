@@ -45,11 +45,11 @@ Each record contains the following fields in order:
 
 | Field | Type | Condition | Description |
 | ----- | ---- | --------- | ----------- |
-| `color_type` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/color_table/records/condition/color_type.md} | \textinput{../snippets/color_table/records/brief/color_type.md} |
-| `alpha` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/color_table/records/condition/alpha.md} | \textinput{../snippets/color_table/records/brief/alpha.md} |
-| `red` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/color_table/records/condition/red.md} | \textinput{../snippets/color_table/records/brief/red.md} |
-| `green` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/color_table/records/condition/green.md} | \textinput{../snippets/color_table/records/brief/green.md} |
-| `blue` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/color_table/records/condition/blue.md} | \textinput{../snippets/color_table/records/brief/blue.md} |
+| `color_type` | `u8` | \textinput{../snippets/color_table/records/condition/color_type.md} | \textinput{../snippets/color_table/records/brief/color_type.md} |
+| `alpha` | `u8` | \textinput{../snippets/color_table/records/condition/alpha.md} | \textinput{../snippets/color_table/records/brief/alpha.md} |
+| `red` | `u8` | \textinput{../snippets/color_table/records/condition/red.md} | \textinput{../snippets/color_table/records/brief/red.md} |
+| `green` | `u8` | \textinput{../snippets/color_table/records/condition/green.md} | \textinput{../snippets/color_table/records/brief/green.md} |
+| `blue` | `u8` | \textinput{../snippets/color_table/records/condition/blue.md} | \textinput{../snippets/color_table/records/brief/blue.md} |
 
 
 ### Record Layout Examples

@@ -3,7 +3,7 @@
 ## Table Structure
 
 ### Identifier
-- **Value**: `[IDENTIFIER_PLACEHOLDER]`
+- **Value**: `0x02`
 
 
 ## Configuration Flags
@@ -43,10 +43,10 @@ Each record contains the following fields in order:
 
 | Field | Type | Condition | Description |
 | ----- | ---- | --------- | ----------- |
-| `width` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/pixmap_table/records/condition/width.md} | \textinput{../snippets/pixmap_table/records/brief/width.md} |
-| `height` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/pixmap_table/records/condition/height.md} | \textinput{../snippets/pixmap_table/records/brief/height.md} |
-| `bits_per_pixel` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/pixmap_table/records/condition/bits_per_pixel.md} | \textinput{../snippets/pixmap_table/records/brief/bits_per_pixel.md} |
-| `data` | `[TYPE_PLACEHOLDER]` | \textinput{../snippets/pixmap_table/records/condition/data.md} | \textinput{../snippets/pixmap_table/records/brief/data.md} |
+| `width` | `u8` | \textinput{../snippets/pixmap_table/records/condition/width.md} | \textinput{../snippets/pixmap_table/records/brief/width.md} |
+| `height` | `u8` | \textinput{../snippets/pixmap_table/records/condition/height.md} | \textinput{../snippets/pixmap_table/records/brief/height.md} |
+| `bits_per_pixel` | `u8` | \textinput{../snippets/pixmap_table/records/condition/bits_per_pixel.md} | \textinput{../snippets/pixmap_table/records/brief/bits_per_pixel.md} |
+| `data` | `Vec<u8>` | \textinput{../snippets/pixmap_table/records/condition/data.md} | \textinput{../snippets/pixmap_table/records/brief/data.md} |
 
 ### Pixel Data Encoding
  
