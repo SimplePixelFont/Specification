@@ -1,3 +1,1 @@
-# font_type
-
-Write the documentation content for font_type here.
+Style of this font (0 = Regular, 1 = Bold, 2 = Italic).
