@@ -1,3 +1,1 @@
-# width
-
-Write the documentation content for width here.
+	If use_constant_width is not enabled.

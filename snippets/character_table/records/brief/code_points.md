@@ -1,1 +1,1 @@
-Always present
+UTF-8 encoded codepoint sequence (null-terminated unless `constant_code_point_count` is set).

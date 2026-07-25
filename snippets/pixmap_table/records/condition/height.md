@@ -1,3 +1,1 @@
-# height
-
-Write the documentation content for height here.
+	If use_constant_height is not enabled.

@@ -1,3 +1,1 @@
-# data
-
-Write the documentation content for data here.
+Packed pixel data as a bit array
