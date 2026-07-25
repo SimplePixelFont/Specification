@@ -110,7 +110,7 @@ The font `Toys` by `Nicé`, a bold variant drawing from two Character Tables. Th
  
 The following byte sequence defines a Font Table holding two fonts, a Regular and a Bold. Between them they use the two Character Tables the table links to:
  
-| Byte(s) | Binary     | Hex  | Description                                        |
+| Byte | Binary     | Hex  | Description                                        |
 | ------- | ---------- | ---- | -------------------------------------------------- |
 | 1       | `00000100` | `04` | Table identifier for Font Table                    |
 | 2       | `00000000` | `00` | Modifier flags: none set                           |

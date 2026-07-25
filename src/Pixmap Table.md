@@ -167,7 +167,7 @@ Byte 3 holds four used bits, so its value `0x09` stays within the `(1 << 4) - 1 
  
 The following byte sequence defines a Pixmap Table with two 5 × 3 pixmaps at 1 bit per pixel, all three dimensions fixed at the table level, linked to one Color Table:
  
-| Byte(s) | Binary     | Hex  | Description                                                                                    |
+| Bytes | Binary     | Hex  | Description                                                                                    |
 | ------- | ---------- | ---- | ---------------------------------------------------------------------------------------------- |
 | 1       | `00000010` | `02` | Table identifier for Pixmap Table                                                              |
 | 2       | `00000000` | `00` | Modifier flags: none set                                                                       |

@@ -1,1 +1,1 @@
-Index of the pixmap within the referenced Pixmap Table(s).
+Index of the pixmap within the referenced Pixmap Tables.

@@ -97,7 +97,7 @@ Result: `rgba(0, 0, 0, 255)`, an absolute black that a renderer should not recol
  
 The following byte sequence defines a two-entry palette with a shared alpha, one dynamic color and one absolute color:
  
-| Byte(s) | Binary     | Hex  | Description                                        |
+| Bytes | Binary     | Hex  | Description                                        |
 | ------- | ---------- | ---- | -------------------------------------------------- |
 | 1       | `00000011` | `03` | Table identifier for Color Table                   |
 | 2       | `00000001` | `01` | Modifier flags: `use_color_type` enabled           |

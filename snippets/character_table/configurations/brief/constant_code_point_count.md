@@ -1,1 +1,1 @@
-The exact codepoint length of each `code_points` field in this table
+The exact code point length of each `code_points` field in this table
