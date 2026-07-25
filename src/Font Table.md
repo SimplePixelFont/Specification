@@ -1,5 +1,5 @@
 \textinput{../snippets\font_table/brief.md}
-
+ 
 ## Table Structure
 
 ### Identifier
