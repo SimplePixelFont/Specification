@@ -3,18 +3,18 @@
     "brief.md": "Defines mappings between UTF-8 codepoint sequences (characters) and their visual representations (pixmaps).\n\n## Use Cases\n\n- **Character-to-glyph mapping** - Associates text characters, including single utf8 codepoints, ligatures, and grapheme clusters, with their pixmap representation.\n",
     "configurations": {
       "brief": {
-        "constant_codepoint_count.md": "The exact codepoint length of each `codepoints` field in this table"
+        "constant_code_point_count.md": "The exact code point length of each `code_points` field in this table"
       },
       "condition": {
-        "constant_codepoint_count.md": "If `use_constant_codepoint_count` is enabled."
+        "constant_code_point_count.md": "If `use_constant_code_point_count` is enabled."
       },
       "flag": {
-        "use_constant_codepoint_count.md": "All characters in this table have the same number of codepoints."
+        "use_constant_code_point_count.md": "All characters in this table have the same number of code points."
       }
     },
     "links": {
       "brief": {
-        "pixmap_tables.md": "Vector of Pixmap Table indices this character table references."
+        "pixmap_tables.md": "Length byte followed by that many Pixmap Table indices this character table may reference."
       },
       "condition": {
         "pixmap_tables.md": "If `link_pixmap_tables` is enabled."
@@ -31,64 +31,90 @@
       },
       "details": {
         "use_advance_x.md": "When disabled, the default advance is the pixmap's width. Letter spacing, if any, is added to the advance value.",
-        "use_pixmap_index.md": "When disabled, the pixmap index defaults to match the character record index (1:1 mapping).",
+        "use_pixmap_index.md": "When disabled, the pixmap index defaults to match the character record index creating a one to one mapping.",
         "use_pixmap_table_index.md": "When disabled, the renderer searches linked Pixmap Tables in order until finding a valid pixmap at the character's index. The first pixmap linked will have priority over the last."
       }
     },
     "records": {
       "brief": {
         "advance_x.md": "Number of pixels to advance horizontally after rendering this character.",
-        "codepoints.md": "Always present",
-        "pixmap_index.md": "If `use_pixmap_index` modifier is enabled.",
-        "pixmap_table_index.md": "If `use_pixmap_table_index` modifier is enabled."
+        "code_points.md": "UTF-8 encoded code point sequence, null-terminated unless `constant_code_point_count` is set.",
+        "pixmap_index.md": "Index of the pixmap within the referenced Pixmap Tables.",
+        "pixmap_table_index.md": "Index of the specific Pixmap Table to use for this character."
       },
       "condition": {
         "advance_x.md": "If `use_advance_x` modifier is enabled.",
-        "codepoints.md": "UTF-8 encoded codepoint sequence (null-terminated unless `constant_codepoint_count` is set).",
-        "pixmap_index.md": "Index of the pixmap within the referenced Pixmap Table(s).",
-        "pixmap_table_index.md": "Index of the specific Pixmap Table to use for this character."
+        "code_points.md": "Always present",
+        "pixmap_index.md": "If `use_pixmap_index` modifier is enabled.",
+        "pixmap_table_index.md": "If `use_pixmap_table_index` modifier is enabled."
       }
     }
   },
   "color_table": {
-    "brief.md": "# color_table table\n\nWrite the documentation content for color_table table here.",
+    "brief.md": "Stores RGBA color values that can be referenced by pixmap data.\n\n## Use Cases\n\n- **Pixmap palettes** - When linked to a Pixmap Table, provides the color palette for indexed pixel data.\n- **Color storage** - Can store color sets independently for other purposes.",
     "configurations": {
       "brief": {
-        "constant_alpha.md": "# constant_alpha\n\nWrite the documentation content for constant_alpha here."
+        "constant_alpha.md": "The alpha channel value applied to all colors in this table."
+      },
+      "condition": {
+        "constant_alpha.md": "If `use_constant_alpha` is enabled."
+      },
+      "flag": {
+        "use_constant_alpha.md": "All colors in this table share the same alpha value."
       }
     },
     "modifiers": {
       "brief": {
-        "use_color_type.md": "# use_color_type\n\nWrite the documentation content for use_color_type here."
+        "use_color_type.md": "Each record includes a `color_type` field indicating the color mutability type."
       },
       "details": {
-        "use_color_type.md": "# use_color_type details\n\nWrite the documentation content for use_color_type details here."
+        "use_color_type.md": "When disabled, the default color type is dynamic. The rendering engine may change the RGBA color to support features such as, but not limited to; text color, and/or palette theming."
       }
     },
     "records": {
       "brief": {
-        "alpha.md": "# alpha\n\nWrite the documentation content for alpha here.",
-        "blue.md": "# blue\n\nWrite the documentation content for blue here.",
-        "color_type.md": "# color_type\n\nWrite the documentation content for color_type here.",
-        "green.md": "# green\n\nWrite the documentation content for green here.",
-        "red.md": "# red\n\nWrite the documentation content for red here."
+        "alpha.md": "Alpha channel value (0 = fully transparent, 255 = fully opaque).",
+        "blue.md": "Blue channel value.",
+        "color_type.md": "Color Type value (0 = Dynamic, 1 = Absolute).",
+        "green.md": "Green channel value.",
+        "red.md": "Red channel value."
+      },
+      "condition": {
+        "alpha.md": "If `constant_alpha` configuration is **not** set",
+        "blue.md": "Always present",
+        "color_type.md": "If `use_color_type` modifier is enabled.",
+        "green.md": "Always present",
+        "red.md": "Always present"
       }
     }
   },
   "font_table": {
-    "brief.md": "# font_table table\n\nWrite the documentation content for font_table table here.",
+    "brief.md": "Groups Character Tables into named fonts and carries the metadata to identify them.\n \n## Use Cases\n \n- **Sub-font grouping** - A single file can carry several related fonts, such as Regular, Bold, and Italic, each pointing at its own Character Tables.",
     "links": {
       "brief": {
-        "character_tables.md": "# character_tables\n\nWrite the documentation content for character_tables here."
+        "character_tables.md": "Length byte followed by that many Character Table indices this font table may reference."
+      },
+      "condition": {
+        "character_tables.md": "If `link_character_tables` is enabled."
+      },
+      "flag": {
+        "link_character_tables.md": "This table links to one or more Character Tables."
       }
     },
     "records": {
       "brief": {
-        "author.md": "# author\n\nWrite the documentation content for author here.",
-        "character_table_indexes.md": "# character_table_indexes\n\nWrite the documentation content for character_table_indexes here.",
-        "font_type.md": "# font_type\n\nWrite the documentation content for font_type here.",
-        "name.md": "# name\n\nWrite the documentation content for name here.",
-        "version.md": "# version\n\nWrite the documentation content for version here."
+        "author.md": "Author, manufacturer, or credits for the font.",
+        "character_table_indexes.md": "Length byte followed by that many Character Table indices this font may access and use.",
+        "font_type.md": "Style of this font (0 = Regular, 1 = Bold, 2 = Italic).",
+        "name.md": "Human-readable font name.",
+        "version.md": "Revision number of this font,"
+      },
+      "condition": {
+        "author.md": "Always present.",
+        "character_table_indexes.md": "Always present.",
+        "font_type.md": "Always present.",
+        "name.md": "Always present.",
+        "version.md": "Always present."
       }
     }
   },
@@ -96,25 +122,47 @@
     "reserved.md": "Reserved for future use."
   },
   "pixmap_table": {
-    "brief.md": "# pixmap_table table\n\nWrite the documentation content for pixmap_table table here.",
+    "brief.md": "Stores glyph data as collections of pixels within pixmaps, representing the visual appearance of a character.\n\n## Use Cases\n\n- **Glyph storage** - Contains the pixmap images for font characters\n",
     "configurations": {
       "brief": {
-        "constant_bits_per_pixel.md": "# constant_bits_per_pixel\n\nWrite the documentation content for constant_bits_per_pixel here.",
-        "constant_height.md": "# constant_height\n\nWrite the documentation content for constant_height here.",
-        "constant_width.md": "# constant_width\n\nWrite the documentation content for constant_width here."
+        "constant_bits_per_pixel.md": "The bits per pixel shared by all pixmaps in this table (only 1-8 supported).",
+        "constant_height.md": "The height in pixels shared by all pixmaps in this table.",
+        "constant_width.md": "The width in pixels shared by all pixmaps in this table."
+      },
+      "condition": {
+        "constant_bits_per_pixel.md": "If `use_constant_bits_per_pixel` is enabled",
+        "constant_height.md": "If `use_constant_height` is enabled.",
+        "constant_width.md": "If `use_constant_width` is enabled."
+      },
+      "flag": {
+        "use_constant_bits_per_pixel.md": "All pixmaps in this table use the same number of bits to represent a pixel.",
+        "use_constant_height.md": "All pixmaps in this table share the same height.",
+        "use_constant_width.md": "All pixmaps in this table share the same width."
       }
     },
     "links": {
       "brief": {
-        "color_tables.md": "# color_tables\n\nWrite the documentation content for color_tables here."
+        "color_tables.md": "Length byte followed by that many Color Table indices supplying the palette that pixel values index into."
+      },
+      "condition": {
+        "color_tables.md": "If `link_color_tables` is enabled."
+      },
+      "flag": {
+        "link_color_tables.md": "This table links to one or more Color Tables for palette mapping"
       }
     },
     "records": {
       "brief": {
-        "bits_per_pixel.md": "# bits_per_pixel\n\nWrite the documentation content for bits_per_pixel here.",
-        "data.md": "# data\n\nWrite the documentation content for data here.",
-        "height.md": "# height\n\nWrite the documentation content for height here.",
-        "width.md": "# width\n\nWrite the documentation content for width here."
+        "bits_per_pixel.md": "Bits used to represent each pixel of this pixmap (only 1-8 supported).",
+        "data.md": "Packed pixel data as a bit array",
+        "height.md": "Height of this pixmap in pixels.",
+        "width.md": "Width of this pixmap in pixels."
+      },
+      "condition": {
+        "bits_per_pixel.md": "If `use_constant_bits_per_pixel` is not enabled.",
+        "data.md": "Always present.",
+        "height.md": "If `use_constant_height` is not enabled.",
+        "width.md": "If `use_constant_width` is not enabled."
       }
     }
   }
