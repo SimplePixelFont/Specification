@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import { linkifyText, type SnippetTree } from "./link-resolver";
 
 type NestedRecord = Record<string, string | NestedRecord>;
 
@@ -161,6 +162,52 @@ async function expandSnippets(options: Record<string, string>) {
 
   await writeNestedTree(snippetsDir, data);
   console.log(`Expanded ${path.relative(process.cwd(), inputPath)} into snippets/`);
+}
+
+const GLOBAL_SNIPPET_KEYS = ["errors", "data_types"];
+
+function isLeafNode(node: unknown): node is string {
+  return typeof node === "string";
+}
+
+function linkifyTree(
+  tree: SnippetTree,
+  tableDir: string,
+  localTree: SnippetTree,
+  globalTrees: Record<string, SnippetTree>
+): SnippetTree {
+  const result: SnippetTree = {};
+  for (const [key, value] of Object.entries(tree)) {
+    result[key] = isLeafNode(value)
+      ? linkifyText(value, tableDir, localTree, globalTrees)
+      : linkifyTree(value, tableDir, localTree, globalTrees);
+  }
+  return result;
+}
+
+async function expandRustLinks(options: Record<string, string>) {
+  const inputPath = path.resolve(options.input || path.join(process.cwd(), "snippets.json"));
+  const outputDir = path.resolve(
+    options.output || (() => { throw new Error("--output is required (target directory for the rust-linked snippets)"); })()
+  );
+
+  const text = await fs.readFile(inputPath, "utf8");
+  const data = JSON.parse(text) as Record<string, SnippetTree>;
+
+  const globalTrees: Record<string, SnippetTree> = {};
+  for (const key of GLOBAL_SNIPPET_KEYS) {
+    if (data[key]) globalTrees[key] = data[key];
+  }
+
+  const processed: Record<string, SnippetTree> = {};
+  for (const [tableDir, tree] of Object.entries(data)) {
+    processed[tableDir] = GLOBAL_SNIPPET_KEYS.includes(tableDir) || tableDir === "phrase"
+      ? tree
+      : linkifyTree(tree, tableDir, tree, globalTrees);
+  }
+
+  await writeNestedTree(outputDir, processed);
+  console.log(`Wrote rust-linked snippets to ${path.relative(process.cwd(), outputDir)}`);
 }
 
 function getRelativeSnippetPath(snippetType: string, category: string, filename: string): string {
@@ -454,6 +501,9 @@ async function main() {
       break;
     case "expand":
       await expandSnippets(options);
+      break;
+    case "expand-rust-links":
+      await expandRustLinks(options);
       break;
     case "document":
       await generateDocument(options);
