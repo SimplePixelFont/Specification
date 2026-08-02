@@ -1,0 +1,59 @@
+name: sync-spf-rs
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "snippets/**"
+      - "snippets.json"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout Specification
+        uses: actions/checkout@v4
+        with:
+          path: Specification
+
+      - name: checkout spf.rs
+        uses: actions/checkout@v4
+        with:
+          repository: SimplePixelFont/spf.rs
+          path: spf.rs
+          token: ${{ secrets.SPF_RS_SYNC_TOKEN }}
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: install Specification tooling
+        working-directory: Specification
+        run: npm ci
+
+      - name: regenerate rust-linked snippets directly into spf.rs
+        working-directory: Specification
+        run: |
+          npm run snippet:collapse
+          npx tsx scripts/snippet-tool.ts expand-rust-links --output "$GITHUB_WORKSPACE/spf.rs/res/snippets"
+
+      - name: open PR against spf.rs
+        working-directory: spf.rs
+        env:
+          GH_TOKEN: ${{ secrets.SPF_RS_SYNC_TOKEN }}
+        run: |
+          if git diff --quiet -- res/snippets; then
+            echo "No snippet changes to sync."
+            exit 0
+          fi
+          git config user.name "spf-spec-sync-bot"
+          git config user.email "actions@github.com"
+          BRANCH="sync-snippets-$(date +%s)"
+          git checkout -b "$BRANCH"
+          git add res/snippets
+          git commit -m "sync: update vendored snippets from Specification@${{ github.sha }}"
+          git push origin "$BRANCH"
+          gh pr create --repo SimplePixelFont/spf.rs --head "$BRANCH" --base main \
+            --title "Sync snippets from Specification" \
+            --body "Automated sync from SimplePixelFont/Specification@${{ github.sha }}. Review the diff in res/snippets before merging."
