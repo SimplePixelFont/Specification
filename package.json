@@ -6,7 +6,8 @@
     "snippet:generate": "tsx scripts/snippet-tool.ts generate",
     "snippet:collapse": "tsx scripts/snippet-tool.ts collapse",
     "snippet:expand": "tsx scripts/snippet-tool.ts expand",
-    "snippet:document": "tsx scripts/snippet-tool.ts document"
+    "snippet:document": "tsx scripts/snippet-tool.ts document",
+    "test": "tsx --test scripts/*.test.ts"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
