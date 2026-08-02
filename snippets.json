@@ -88,6 +88,19 @@
       }
     }
   },
+  "errors": {
+    "conversion_nul_error.md": "A Rust string being converted to a C string contained an interior nul byte.\n",
+    "conversion_utf8_error.md": "A C string being converted to a Rust string was not valid UTF-8.\n",
+    "invalid_pixmap_data.md": "A pixmap's data did not fit the byte layout implied by its width, height, and bits per pixel, or exceeded the maximum value allowed by a compact-encoded partial byte.\n",
+    "invalid_signature.md": "The first four bytes did not match the SimplePixelFont file signature.\n",
+    "ok.md": "The operation completed successfully.\n",
+    "static_vector_too_large.md": "A `Vec` field, such as a table's records or a set of link indexes, held more than 255 entries, which cannot be represented by this format's single-byte length prefixes.\n",
+    "unexpected_end_of_file.md": "The byte buffer ended before a complete field, record, or table could be read.\n",
+    "unsupported_color_type.md": "A record's color type byte did not correspond to any known `ColorType` variant.\n",
+    "unsupported_font_type.md": "A font record's font type byte did not correspond to any known `FontType` variant.\n",
+    "unsupported_table_identifier.md": "A table's identifier byte did not correspond to any known table type.\n",
+    "unsupported_version.md": "The file's version byte did not correspond to any known `Version` variant.\n"
+  },
   "font_table": {
     "brief.md": "Groups Character Tables into named fonts and carries the metadata to identify them.\r\n \r\n## Use Cases\r\n \r\n- **Sub-font grouping** - A single file can carry several related fonts, such as Regular, Bold, and Italic, each pointing at its own Character Tables.",
     "links": {
