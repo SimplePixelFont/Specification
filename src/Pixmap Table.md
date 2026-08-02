@@ -43,24 +43,24 @@ Each record contains the following fields in order:
 
 | Field | Type | Condition | Description |
 | ----- | ---- | --------- | ----------- |
-| `width` | `u8` | \textinput{../snippets/pixmap_table/records/condition/width.md} | \textinput{../snippets/pixmap_table/records/brief/width.md} |
-| `height` | `u8` | \textinput{../snippets/pixmap_table/records/condition/height.md} | \textinput{../snippets/pixmap_table/records/brief/height.md} |
-| `bits_per_pixel` | `u8` | \textinput{../snippets/pixmap_table/records/condition/bits_per_pixel.md} | \textinput{../snippets/pixmap_table/records/brief/bits_per_pixel.md} |
+| `custom_width` | `u8` | \textinput{../snippets/pixmap_table/records/condition/custom_width.md} | \textinput{../snippets/pixmap_table/records/brief/custom_width.md} |
+| `custom_height` | `u8` | \textinput{../snippets/pixmap_table/records/condition/custom_height.md} | \textinput{../snippets/pixmap_table/records/brief/custom_height.md} |
+| `custom_bits_per_pixel` | `u8` | \textinput{../snippets/pixmap_table/records/condition/custom_bits_per_pixel.md} | \textinput{../snippets/pixmap_table/records/brief/custom_bits_per_pixel.md} |
 | `data` | `Vec<u8>` | \textinput{../snippets/pixmap_table/records/condition/data.md} | \textinput{../snippets/pixmap_table/records/brief/data.md} |
 
 ### Pixel Data Encoding
  
-Resolve `width`, `height`, and `bits_per_pixel` first, taking the table constant where one exists and the record's own value otherwise, then:
+Resolve `custom_width`, `custom_height`, and `custom_bits_per_pixel` first, taking the table constant where one exists and the record's own value otherwise, then:
  
 | Quantity              | Formula                                |
 | --------------------- | -------------------------------------- |
-| `total_bits`          | `width × height × bits_per_pixel`      |
+| `total_bits`          | `custom_width × custom_height × custom_bits_per_pixel` |
 | `complete_bytes_used` | `total_bits / 8`                       |
 | `remainder_bits`      | `total_bits % 8`                       |
  
 Pixels are stored row-major, origin top-left, left to right then top to bottom, and packed least significant bit first: pixel 0 takes the lowest unused bits of the first byte (LSB), each following pixel uses the next bits available, resuming at bit 0 of the next byte if cut off.
  
-Every pixel value is an index into the linked Color Table. If no Color Table is linked, then the renderer should assume 0 as transparent and 1 as opaque. `bits_per_pixel` determines how many records from the Color Table the pixmap can address.
+Every pixel value is an index into the linked Color Table. If no Color Table is linked, then the renderer should assume 0 as transparent and 1 as opaque. `custom_bits_per_pixel` determines how many records from the Color Table the pixmap can address.
 
 The final partial byte is where the file-level `compact` property applies:
 
@@ -94,8 +94,8 @@ Configuration: `constant_bits_per_pixel = 1` only. A 5 × 3 glyph addressing a t
  
 | Byte | Field    | Binary     | Hex  | Description                                     |
 | ---- | -------- | ---------- | ---- | ----------------------------------------------- |
-| 1    | `width`  | `00000101` | `05` | 5 pixels wide                                   |
-| 2    | `height` | `00000011` | `03` | 3 pixels tall                                   |
+| 1    | `custom_width`  | `00000101` | `05` | 5 pixels wide                                   |
+| 2    | `custom_height` | `00000011` | `03` | 3 pixels tall                                   |
 | 3    | `data`   | `10011111` | `9F` | Pixels 0-7                                      |
 | 4    | `data`   | `00010000` | `10` | Pixels 8-14 in the low 7 bits, 1 bit padding    |
  
@@ -113,7 +113,7 @@ Configuration: `constant_width = 4`, `constant_height = 4`. A 4 × 4 glyph with 
  
 | Byte | Field            | Binary     | Hex  | Description                                |
 | ---- | ---------------- | ---------- | ---- | ------------------------------------------ |
-| 1    | `bits_per_pixel` | `00000010` | `02` | 2 bits per pixel                           |
+| 1    | `custom_bits_per_pixel` | `00000010` | `02` | 2 bits per pixel                           |
 | 2    | `data`           | `11100100` | `E4` | Row 0: palette indices 0, 1, 2, 3          |
 | 3    | `data`           | `11100100` | `E4` | Row 1: palette indices 0, 1, 2, 3          |
 | 4    | `data`           | `11100100` | `E4` | Row 2: palette indices 0, 1, 2, 3          |
@@ -125,9 +125,9 @@ No configuration constants set. A 3 × 3 glyph at 8 bits per pixel, so every pix
  
 | Byte | Field            | Binary     | Hex  | Description                          |
 | ---- | ---------------- | ---------- | ---- | ------------------------------------ |
-| 1    | `width`          | `00000011` | `03` | 3 pixels wide                        |
-| 2    | `height`         | `00000011` | `03` | 3 pixels tall                        |
-| 3    | `bits_per_pixel` | `00001000` | `08` | 8 bits per pixel, up to 256 entries  |
+| 1    | `custom_width`          | `00000011` | `03` | 3 pixels wide                        |
+| 2    | `custom_height`         | `00000011` | `03` | 3 pixels tall                        |
+| 3    | `custom_bits_per_pixel` | `00001000` | `08` | 8 bits per pixel, up to 256 entries  |
 | 4    | `data`           | `00000001` | `01` | Row 0, pixel 0: palette index 1      |
 | 5    | `data`           | `00000000` | `00` | Row 0, pixel 1: palette index 0      |
 | 6    | `data`           | `00000000` | `00` | Row 0, pixel 2: palette index 0      |
@@ -146,7 +146,7 @@ Configuration: `constant_height = 1`, `constant_bits_per_pixel = 2`. A 6 × 1 st
  
 | Byte | Field   | Binary     | Hex  | Description                              |
 | ---- | ------- | ---------- | ---- | ---------------------------------------- |
-| 1    | `width` | `00000110` | `06` | 6 pixels wide                            |
+| 1    | `custom_width` | `00000110` | `06` | 6 pixels wide                            |
 | 2    | `data`  | `00011011` | `1B` | Pixels 0-3                               |
 | 3    | `data`  | `00001001` | `09` | Pixels 4-5 in the low 4 bits             |
  
