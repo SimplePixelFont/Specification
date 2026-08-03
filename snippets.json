@@ -3,7 +3,7 @@
     "brief.md": "Defines mappings between UTF-8 codepoint sequences (characters) and their visual representations (pixmaps).\r\n\r\n## Use Cases\r\n\r\n- **Character-to-glyph mapping** - Associates text characters, including single utf8 codepoints, ligatures, and grapheme clusters, with their pixmap representation.\r\n",
     "configurations": {
       "brief": {
-        "constant_code_point_count.md": "The exact code point length of each `code_points` field in this table"
+        "constant_code_point_count.md": "The exact code point length of all records' `code_points` fields in this table."
       },
       "condition": {
         "constant_code_point_count.md": "If `use_constant_code_point_count` is enabled."
@@ -14,13 +14,13 @@
     },
     "links": {
       "brief": {
-        "pixmap_tables.md": "Length byte followed by that many Pixmap Table indices this character table may reference."
+        "pixmap_tables.md": "Pixmap Tables supplying the pixmaps each record may map to."
       },
       "condition": {
         "pixmap_tables.md": "If `link_pixmap_tables` is enabled."
       },
       "flag": {
-        "link_pixmap_tables.md": "This table links to one or more Pixmap Tables."
+        "link_pixmap_tables.md": "This table links to any number of Pixmap Tables."
       }
     },
     "modifiers": {
@@ -44,7 +44,7 @@
       },
       "condition": {
         "advance_x.md": "If `use_advance_x` modifier is enabled.",
-        "code_points.md": "Always present",
+        "code_points.md": "Always present.",
         "pixmap_index.md": "If `use_pixmap_index` modifier is enabled.",
         "pixmap_table_index.md": "If `use_pixmap_table_index` modifier is enabled."
       }
@@ -93,22 +93,21 @@
       "Absolute.md": "The renderer should render this color exactly as specified, without substitution.\n",
       "Dynamic.md": "The renderer may substitute this color to support features such as text color or palette theming.\n"
     },
-    "ColorType.md": "Distinguishes whether a color should be treated as fixed or subject to theming and recoloring by the renderer.\n",
-    "CString.md": "A nul-terminated byte string used at the C ABI boundary; the FFI mirror of a Rust string.\n",
+    "ColorType.md": "Distinguishes whether a color should be treated as fixed or can be themed and recolored by the renderer.\n",
     "FontType": {
       "Bold.md": "The bold-weight variant of a font family.\n",
       "Italic.md": "The italic or oblique variant of a font family.\n",
       "Regular.md": "The default, unstyled variant of a font family.\n"
     },
-    "FontType.md": "The typographic style a font represents, used to group related fonts (for example, the Regular/Bold/Italic of the same family) that reference different Character Tables.\n",
+    "FontType.md": "The typographic style a font represents.\n",
     "has_field.md": "Non-zero if the corresponding optional field is present; zero if it should be treated as absent (`None`).\n",
-    "String.md": "A UTF-8 encoded, growable string, used by the native Rust API for text fields such as a font's name and a character's code points.\n",
-    "u8.md": "A single byte (0-255), the width used for nearly every scalar value in this format.\n",
-    "Vec.md": "A growable, heap-allocated array. Table records and link index lists are stored as `Vec`s in the native Rust API and as raw pointer and length pairs across the FFI boundary.\n",
+    "String.md": "A null-terminated (\\0x00), UTF-8 encoded byte string of any length. Unless otherwise specified.\n",
+    "u8.md": "A single byte representing a number from 0 to 255 unless otherwise specified.",
+    "Vec.md": "`u8` length byte followed by that many entries of type `T`. Unless otherwise specified.",
     "Version": {
-      "FV0.md": "The initial, and currently only, SimplePixelFont format version.\n"
+      "FV0.md": "The latest SimplePixelFont format version.\n"
     },
-    "Version.md": "Identifies which revision of the SimplePixelFont binary layout a file was parsed from or should be serialized as.\n"
+    "Version.md": "Identifies which version of the SimplePixelFont binary layout a file was parsed from or should be serialized as.\n"
   },
   "errors": {
     "conversion_nul_error.md": "A Rust string being converted to a C string contained an interior nul byte.\n",
@@ -127,13 +126,13 @@
     "brief.md": "Groups Character Tables into named fonts and carries the metadata to identify them.\r\n \r\n## Use Cases\r\n \r\n- **Sub-font grouping** - A single file can carry several related fonts, such as Regular, Bold, and Italic, each pointing at its own Character Tables.",
     "links": {
       "brief": {
-        "character_tables.md": "Length byte followed by that many Character Table indices this font table may reference."
+        "character_tables.md": "Characters Tables supplying the set of characters each record can include."
       },
       "condition": {
         "character_tables.md": "If `link_character_tables` is enabled."
       },
       "flag": {
-        "link_character_tables.md": "This table links to one or more Character Tables."
+        "link_character_tables.md": "This table links to any number of Character Tables."
       }
     },
     "records": {
@@ -177,13 +176,13 @@
     },
     "links": {
       "brief": {
-        "color_tables.md": "Length byte followed by that many Color Table indices supplying the palette that pixel values index into."
+        "color_tables.md": "Color Tables supplying the colors each record's pixel values map to in this table."
       },
       "condition": {
         "color_tables.md": "If `link_color_tables` is enabled."
       },
       "flag": {
-        "link_color_tables.md": "This table links to one or more Color Tables for palette mapping"
+        "link_color_tables.md": "This table links to any number of Color Tables."
       }
     },
     "records": {

@@ -8,7 +8,6 @@ Reference for the data types used throughout this specification and its referenc
 | ---- | ----------- |
 | `u8` | \textinput{../snippets/data_types/u8.md} |
 | `String` | \textinput{../snippets/data_types/String.md} |
-| `CString` | \textinput{../snippets/data_types/CString.md} |
 | `Vec` | \textinput{../snippets/data_types/Vec.md} |
 
 ## Version

@@ -41,8 +41,8 @@ Each record contains the following fields in order:
 
 | Field | Type | Condition | Description |
 | ----- | ---- | --------- | ----------- |
-| `name` | `CString` | \textinput{../snippets/font_table/records/condition/name.md} | \textinput{../snippets/font_table/records/brief/name.md} |
-| `author` | `CString` | \textinput{../snippets/font_table/records/condition/author.md} | \textinput{../snippets/font_table/records/brief/author.md} |
+| `name` | `String` | \textinput{../snippets/font_table/records/condition/name.md} | \textinput{../snippets/font_table/records/brief/name.md} |
+| `author` | `String` | \textinput{../snippets/font_table/records/condition/author.md} | \textinput{../snippets/font_table/records/brief/author.md} |
 | `version` | `u8` | \textinput{../snippets/font_table/records/condition/version.md} | \textinput{../snippets/font_table/records/brief/version.md} |
 | `font_type` | `u8` | \textinput{../snippets/font_table/records/condition/font_type.md} | \textinput{../snippets/font_table/records/brief/font_type.md} |
 | `linked_character_table_indexes` | `Vec<u8>` | \textinput{../snippets/font_table/records/condition/linked_character_table_indexes.md} | \textinput{../snippets/font_table/records/brief/linked_character_table_indexes.md} |

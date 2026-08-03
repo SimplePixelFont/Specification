@@ -49,12 +49,12 @@ Each record contains the following fields in order:
 | `data` | `Vec<u8>` | \textinput{../snippets/pixmap_table/records/condition/data.md} | \textinput{../snippets/pixmap_table/records/brief/data.md} |
 
 ### Pixel Data Encoding
- 
-Resolve `custom_width`, `custom_height`, and `custom_bits_per_pixel` first, taking the table constant where one exists and the record's own value otherwise, then:
+
+Resolve `width`, `height`, and `bits_per_pixel` first, taking the table constant where one exists and the record's own value otherwise, then:
  
 | Quantity              | Formula                                |
 | --------------------- | -------------------------------------- |
-| `total_bits`          | `custom_width × custom_height × custom_bits_per_pixel` |
+| `total_bits`          | `width × height × bits_per_pixel` |
 | `complete_bytes_used` | `total_bits / 8`                       |
 | `remainder_bits`      | `total_bits % 8`                       |
  
