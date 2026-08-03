@@ -126,7 +126,7 @@ The ligature `!=` stored as a single character, with no constant code point coun
  
 The following byte sequence defines a minimal Character Table with two characters (`A` and `B`), using custom advance values and linking to one Pixmap Table:
  
-| Byte(s) | Binary     | Hex  | Description                                                    |
+| Bytes | Binary     | Hex  | Description                                                    |
 | ------- | ---------- | ---- | -------------------------------------------------------------- |
 | 1       | `00000001` | `01` | Table identifier for Character Table                           |
 | 2       | `00000011` | `03` | Modifier flags: `use_advance_x` and `use_pixmap_index` enabled |
