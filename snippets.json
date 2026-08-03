@@ -97,11 +97,11 @@
     "FontType": {
       "Bold.md": "The bold-weight variant of a font family.\n",
       "Italic.md": "The italic or oblique variant of a font family.\n",
-      "Regular.md": "The default, unstyled variant of a font family.\n"
+      "Regular.md": "The default variant of a font family.\n"
     },
     "FontType.md": "The typographic style a font represents.\n",
     "has_field.md": "Non-zero if the corresponding optional field is present; zero if it should be treated as absent (`None`).\n",
-    "String.md": "A null-terminated (\\0x00), UTF-8 encoded byte string of any length. Unless otherwise specified.\n",
+    "String.md": "A null-terminated (0x00), UTF-8 encoded byte string of any length. Unless otherwise specified.\n",
     "u8.md": "A single byte representing a number from 0 to 255 unless otherwise specified.",
     "Vec.md": "`u8` length byte followed by that many entries of type `T`. Unless otherwise specified.",
     "Version": {
@@ -110,7 +110,7 @@
     "Version.md": "Identifies which version of the SimplePixelFont binary layout a file was parsed from or should be serialized as.\n"
   },
   "errors": {
-    "conversion_nul_error.md": "A Rust string being converted to a C string contained an interior nul byte.\n",
+    "conversion_null_error.md": "A Rust string being converted to a C string contained an interior null byte.\n",
     "conversion_utf8_error.md": "A C string being converted to a Rust string was not valid UTF-8.\n",
     "invalid_pixmap_data.md": "A pixmap's data did not fit the byte layout implied by its width, height, and bits per pixel, or exceeded the maximum value allowed by a compact-encoded partial byte.\n",
     "invalid_signature.md": "The first four bytes did not match the SimplePixelFont file signature.\n",
