@@ -1,2 +1,4 @@
 (?i)pixmap
 (?i)pixmaps
+(?i)serializer
+(?i)deserializer
