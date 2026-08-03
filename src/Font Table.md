@@ -41,11 +41,11 @@ Each record contains the following fields in order:
 
 | Field | Type | Condition | Description |
 | ----- | ---- | --------- | ----------- |
-| `name` | `CString` | \textinput{../snippets/font_table/records/condition/name.md} | \textinput{../snippets/font_table/records/brief/name.md} |
-| `author` | `CString` | \textinput{../snippets/font_table/records/condition/author.md} | \textinput{../snippets/font_table/records/brief/author.md} |
+| `name` | `String` | \textinput{../snippets/font_table/records/condition/name.md} | \textinput{../snippets/font_table/records/brief/name.md} |
+| `author` | `String` | \textinput{../snippets/font_table/records/condition/author.md} | \textinput{../snippets/font_table/records/brief/author.md} |
 | `version` | `u8` | \textinput{../snippets/font_table/records/condition/version.md} | \textinput{../snippets/font_table/records/brief/version.md} |
 | `font_type` | `u8` | \textinput{../snippets/font_table/records/condition/font_type.md} | \textinput{../snippets/font_table/records/brief/font_type.md} |
-| `character_table_indexes` | `Vec<u8>` | \textinput{../snippets/font_table/records/condition/character_table_indexes.md} | \textinput{../snippets/font_table/records/brief/character_table_indexes.md} |
+| `linked_character_table_indexes` | `Vec<u8>` | \textinput{../snippets/font_table/records/condition/linked_character_table_indexes.md} | \textinput{../snippets/font_table/records/brief/linked_character_table_indexes.md} |
 
 ### Record Layout Examples
 
@@ -59,8 +59,8 @@ An unnamed, uncredited font drawing from a single Character Table.
 | 2    | `author`           | `00000000` | `00` | Empty author, terminator only        |
 | 3    | `version`          | `00000001` | `01` | Version 1                            |
 | 4    | `font_type`        | `00000000` | `00` | 0 = Regular                          |
-| 5    | `character_table_indexes` | `00000001` | `01` | Array length = 1                     |
-| 6    | `character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
+| 5    | `linked_character_table_indexes` | `00000001` | `01` | Array length = 1                     |
+| 6    | `linked_character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
  
 **Example 2: Typical record**
  
@@ -80,8 +80,8 @@ The font `Toys` by `Nice`, linking one Character Table.
 | 10   | —                  | `00000000` | `00` | Null terminator ends `author`        |
 | 11   | `version`          | `00000001` | `01` | Version 1                            |
 | 12   | `font_type`        | `00000000` | `00` | 0 = Regular                          |
-| 13   | `character_table_indexes` | `00000001` | `01` | Array length = 1                     |
-| 14   | `character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
+| 13   | `linked_character_table_indexes` | `00000001` | `01` | Array length = 1                     |
+| 14   | `linked_character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
  
 **Example 3: Non-ASCII metadata and multiple Character Tables**
  
@@ -102,9 +102,9 @@ The font `Toys` by `Nicé`, a bold variant drawing from two Character Tables. Th
 | 11   | —                  | `00000000` | `00` | Null terminator ends `author`        |
 | 12   | `version`          | `00000010` | `02` | Version 2                            |
 | 13   | `font_type`        | `00000001` | `01` | 1 = Bold                             |
-| 14   | `character_table_indexes` | `00000010` | `02` | Array length = 2                     |
-| 15   | `character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
-| 16   | `character_table_indexes` | `00000010` | `02` | Uses Character Table 2               |
+| 14   | `linked_character_table_indexes` | `00000010` | `02` | Array length = 2                     |
+| 15   | `linked_character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
+| 16   | `linked_character_table_indexes` | `00000010` | `02` | Uses Character Table 2               |
  
 ## Complete Table Example
  

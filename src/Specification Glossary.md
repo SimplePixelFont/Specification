@@ -1,6 +1,6 @@
 The following defines specific terms used across the specifications that may require clarification, but inline definitions would otherwise add verbosity.
 
-**Enable**, in the context of bitflags, means to set the corresponding bit to 1, also known as on.
+**Enable**, in the context of bit flags, means to set the corresponding bit to 1, also known as on.
 
 **Serializer** refers to the functionality of an application or library responsible for converting text or a higher-level representation of a SimplePixelFont into a stream of bytes.
 

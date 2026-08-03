@@ -46,7 +46,7 @@ Each record contains the following fields in order:
 | Field | Type | Condition | Description |
 | ----- | ---- | --------- | ----------- |
 | `color_type` | `u8` | \textinput{../snippets/color_table/records/condition/color_type.md} | \textinput{../snippets/color_table/records/brief/color_type.md} |
-| `alpha` | `u8` | \textinput{../snippets/color_table/records/condition/alpha.md} | \textinput{../snippets/color_table/records/brief/alpha.md} |
+| `custom_alpha` | `u8` | \textinput{../snippets/color_table/records/condition/custom_alpha.md} | \textinput{../snippets/color_table/records/brief/custom_alpha.md} |
 | `red` | `u8` | \textinput{../snippets/color_table/records/condition/red.md} | \textinput{../snippets/color_table/records/brief/red.md} |
 | `green` | `u8` | \textinput{../snippets/color_table/records/condition/green.md} | \textinput{../snippets/color_table/records/brief/green.md} |
 | `blue` | `u8` | \textinput{../snippets/color_table/records/condition/blue.md} | \textinput{../snippets/color_table/records/brief/blue.md} |
@@ -72,7 +72,7 @@ Result: `rgb(255, 0, 170)`, a magenta taking its alpha from `constant_alpha`.
  
 | Byte | Field   | Binary     | Hex  | Description               |
 | ---- | ------- | ---------- | ---- | ------------------------- |
-| 1    | `alpha` | `10000000` | `80` | Alpha = 128, roughly 50%  |
+| 1    | `custom_alpha` | `10000000` | `80` | Alpha = 128, roughly 50%  |
 | 2    | `red`   | `11111111` | `FF` | Red = 255                 |
 | 3    | `green` | `11111111` | `FF` | Green = 255               |
 | 4    | `blue`  | `11111111` | `FF` | Blue = 255                |
@@ -86,7 +86,7 @@ Result: `rgba(255, 255, 255, 128)`, a 50% transparent white.
 | Byte | Field        | Binary     | Hex  | Description                  |
 | ---- | ------------ | ---------- | ---- | ---------------------------- |
 | 1    | `color_type` | `00000001` | `01` | 1 = Absolute                 |
-| 2    | `alpha`      | `11111111` | `FF` | Alpha = 255, fully opaque    |
+| 2    | `custom_alpha`      | `11111111` | `FF` | Alpha = 255, fully opaque    |
 | 3    | `red`        | `00000000` | `00` | Red = 0                      |
 | 4    | `green`      | `00000000` | `00` | Green = 0                    |
 | 5    | `blue`       | `00000000` | `00` | Blue = 0                     |
