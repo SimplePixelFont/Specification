@@ -16,7 +16,9 @@ jobs:
       - uses: vale-cli/vale-action@v3
         id: vale
         with:
-          files: '["src/**/*.md", "snippets/**/*.md"]' 
+          files: |
+            src
+            snippets
           reporter: github-check
           fail_on_error: true
 
