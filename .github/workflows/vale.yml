@@ -13,9 +13,10 @@ jobs:
       outcome: ${{ steps.vale.outcome }}
     steps:
       - uses: actions/checkout@v4
-      - uses: errata-ai/vale-action@v2.1.1
+      - uses: vale-cli/vale-action@v3
         id: vale
         with:
+          files: '["src/**/*.md", "snippets/**/*.md"]' 
           reporter: github-check
           fail_on_error: true
 
