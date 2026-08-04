@@ -1,6 +1,6 @@
 {
   "character_table": {
-    "brief.md": "Defines mappings between UTF-8 codepoint sequences (characters) and their visual representations (pixmaps).\r\n\r\n## Use Cases\r\n\r\n- **Character-to-glyph mapping** - Associates text characters, including single utf8 codepoints, ligatures, and grapheme clusters, with their pixmap representation.\r\n",
+    "brief.md": "Defines mappings between UTF-8 code point sequences (characters) and their visual representations (pixmaps).\n\n## Use Cases\n\n- **Character-to-glyph mapping** - Associates text characters, including single utf8 code points, ligatures, and grapheme clusters, with their pixmap representation.\n",
     "configurations": {
       "brief": {
         "constant_code_point_count.md": "The exact code point length of all records' `code_points` fields in this table."
@@ -51,7 +51,7 @@
     }
   },
   "color_table": {
-    "brief.md": "Stores RGBA color values that can be referenced by pixmap data.\r\n\r\n## Use Cases\r\n\r\n- **Pixmap palettes** - When linked to a Pixmap Table, provides the color palette for indexed pixel data.\r\n- **Color storage** - Can store color sets independently for other purposes.",
+    "brief.md": "Stores RGBA color values that can be referenced by pixmap data.\n\n## Use Cases\n\n- **Pixmap palettes** - When linked to a Pixmap Table, provides the color palette for indexed pixel data.\n- **Color storage** - Can store color sets independently for other purposes.",
     "configurations": {
       "brief": {
         "constant_alpha.md": "The alpha channel value applied to all colors in this table."
@@ -100,14 +100,14 @@
       "Regular.md": "The default variant of a font family.\n"
     },
     "FontType.md": "The typographic style a font represents.\n",
-    "has_field.md": "Non-zero if the corresponding optional field is present; zero if it should be treated as absent (`None`).\n",
-    "String.md": "A null-terminated (0x00), UTF-8 encoded byte string of any length. Unless otherwise specified.\n",
-    "u8.md": "A single byte representing a number from 0 to 255 unless otherwise specified.",
+    "String.md": "A null-terminated (`0x00`), UTF-8 encoded byte string of any length. Unless otherwise specified.\n",
     "Vec.md": "`u8` length byte followed by that many entries of type `T`. Unless otherwise specified.",
     "Version": {
       "FV0.md": "The latest SimplePixelFont format version.\n"
     },
-    "Version.md": "Identifies which version of the SimplePixelFont binary layout a file was parsed from or should be serialized as.\n"
+    "Version.md": "Identifies which version of the SimplePixelFont binary layout a file was parsed from or should be serialized as.\n",
+    "has_field.md": "Non-zero if the corresponding optional field is present; zero if it should be treated as absent (`None`).\n",
+    "u8.md": "A single byte representing a number from 0 to 255 unless otherwise specified."
   },
   "errors": {
     "conversion_null_error.md": "A Rust string being converted to a C string contained an interior null byte.\n",
@@ -123,7 +123,7 @@
     "unsupported_version.md": "The file's version byte did not correspond to any known `Version` variant.\n"
   },
   "font_table": {
-    "brief.md": "Groups Character Tables into named fonts and carries the metadata to identify them.\r\n \r\n## Use Cases\r\n \r\n- **Sub-font grouping** - A single file can carry several related fonts, such as Regular, Bold, and Italic, each pointing at its own Character Tables.",
+    "brief.md": "Groups Character Tables into named fonts and carries the metadata to identify them.\n \n## Use Cases\n \n- **Sub-font grouping** - A single file can carry several related fonts, such as Regular, Bold, and Italic, each pointing at its own Character Tables.",
     "links": {
       "brief": {
         "character_tables.md": "Characters Tables supplying the set of characters each record can include."
@@ -156,7 +156,7 @@
     "reserved.md": "Reserved for future use."
   },
   "pixmap_table": {
-    "brief.md": "Stores glyph data as collections of pixels within pixmaps, representing the visual appearance of a character.\r\n\r\n## Use Cases\r\n\r\n- **Glyph storage** - Contains the pixmap images for font characters\r\n",
+    "brief.md": "Stores glyph data as collections of pixels within pixmaps, representing the visual appearance of a character.\n\n## Use Cases\n\n- **Glyph storage** - Contains the pixmap images for font characters\n",
     "configurations": {
       "brief": {
         "constant_bits_per_pixel.md": "The bits per pixel shared by all pixmaps in this table (only 1-8 supported).",
