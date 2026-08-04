@@ -19,6 +19,7 @@ jobs:
           files: |
             src
             snippets
+          glob: '{src,snippets}/**/*.md'
           reporter: github-check
           fail_on_error: true
 
