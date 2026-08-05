@@ -99,7 +99,7 @@
       "Italic.md": "The italic or oblique variant of a font family.\n",
       "Regular.md": "The default variant of a font family.\n"
     },
-    "FontType.md": "The typographic style a font represents.\n",
+    "FontType.md": "Bit flags describing the typographic style a font represents. No flags set means Regular.\n",
     "String.md": "A null-terminated (`0x00`), UTF-8 encoded byte string of any length. Unless otherwise specified.\n",
     "Vec.md": "`u8` length byte followed by that many entries of type `T`. Unless otherwise specified.",
     "Version": {
