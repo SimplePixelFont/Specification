@@ -58,7 +58,7 @@ An unnamed, uncredited font drawing from a single Character Table.
 | 1    | `name`             | `00000000` | `00` | Empty name, terminator only          |
 | 2    | `author`           | `00000000` | `00` | Empty author, terminator only        |
 | 3    | `version`          | `00000001` | `01` | Version 1                            |
-| 4    | `font_type`        | `00000000` | `00` | 0 = Regular                          |
+| 4    | `font_type`        | `00000000` | `00` | No bits set = Regular                |
 | 5    | `linked_character_table_indexes` | `00000001` | `01` | Array length = 1                     |
 | 6    | `linked_character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
  
@@ -79,13 +79,13 @@ The font `Toys` by `Nice`, linking one Character Table.
 | 9    | `author`           | `01100101` | `65` | `e`                                  |
 | 10   | —                  | `00000000` | `00` | Null terminator ends `author`        |
 | 11   | `version`          | `00000001` | `01` | Version 1                            |
-| 12   | `font_type`        | `00000000` | `00` | 0 = Regular                          |
+| 12   | `font_type`        | `00000000` | `00` | No bits set = Regular                |
 | 13   | `linked_character_table_indexes` | `00000001` | `01` | Array length = 1                     |
 | 14   | `linked_character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
  
 **Example 3: Non-ASCII metadata and multiple Character Tables**
  
-The font `Toys` by `Nicé`, a bold variant drawing from two Character Tables. The author's last code point needs two UTF-8 bytes.
+The font `Toys` by `Nicé`, a bold and italic variant drawing from two Character Tables. The author's last code point needs two UTF-8 bytes.
  
 | Byte | Field              | Binary     | Hex  | Description                          |
 | ---- | ------------------ | ---------- | ---- | ------------------------------------ |
@@ -101,7 +101,7 @@ The font `Toys` by `Nicé`, a bold variant drawing from two Character Tables. Th
 | 10   | `author`           | `10101001` | `A9` | `é` (U+00E9), byte 2 of 2            |
 | 11   | —                  | `00000000` | `00` | Null terminator ends `author`        |
 | 12   | `version`          | `00000010` | `02` | Version 2                            |
-| 13   | `font_type`        | `00000001` | `01` | 1 = Bold                             |
+| 13   | `font_type`        | `00000011` | `03` | Bits 0,1 set = Bold & Italic        |
 | 14   | `linked_character_table_indexes` | `00000010` | `02` | Array length = 2                     |
 | 15   | `linked_character_table_indexes` | `00000000` | `00` | Uses Character Table 0               |
 | 16   | `linked_character_table_indexes` | `00000010` | `02` | Uses Character Table 2               |
@@ -131,7 +131,7 @@ The following byte sequence defines a Font Table holding two fonts, a Regular an
 | 17      | `01100101` | `65` | Font 0: `author` = `e`                             |
 | 18      | `00000000` | `00` | Font 0: `author` terminator                        |
 | 19      | `00000001` | `01` | Font 0: `version` = 1                              |
-| 20      | `00000000` | `00` | Font 0: `font_type` = 0 (Regular)                  |
+| 20      | `00000000` | `00` | Font 0: `font_type` = no bits set (Regular)         |
 | 21      | `00000001` | `01` | Font 0: character table array length = 1           |
 | 22      | `00000000` | `00` | Font 0: uses Character Table 0                     |
 | 23      | `01010100` | `54` | Font 1: `name` = `T`                               |
@@ -145,6 +145,6 @@ The following byte sequence defines a Font Table holding two fonts, a Regular an
 | 31      | `01100101` | `65` | Font 1: `author` = `e`                             |
 | 32      | `00000000` | `00` | Font 1: `author` terminator                        |
 | 33      | `00000001` | `01` | Font 1: `version` = 1                              |
-| 34      | `00000001` | `01` | Font 1: `font_type` = 1 (Bold)                     |
+| 34      | `00000001` | `01` | Font 1: `font_type` = bit 0 set (Bold)              |
 | 35      | `00000001` | `01` | Font 1: character table array length = 1           |
 | 36      | `00000001` | `01` | Font 1: uses Character Table 1                     |

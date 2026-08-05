@@ -31,8 +31,10 @@ Reference for the data types used throughout this specification and its referenc
 
 \textinput{../snippets/data_types/FontType.md}
 
-| Variant | Description |
-| ------- | ----------- |
-| `Regular` | \textinput{../snippets/data_types/FontType/Regular.md} |
-| `Bold` | \textinput{../snippets/data_types/FontType/Bold.md} |
-| `Italic` | \textinput{../snippets/data_types/FontType/Italic.md} |
+| Bit | Name | Description |
+| --- | ---- | ----------- |
+| 0 | `Bold` | \textinput{../snippets/data_types/FontType/Bold.md} |
+| 1 | `Italic` | \textinput{../snippets/data_types/FontType/Italic.md} |
+| 2-7 | — | \textinput{../snippets/phrase/reserved.md} |
+
+No bits set represents `Regular`: \textinput{../snippets/data_types/FontType/Regular.md}
